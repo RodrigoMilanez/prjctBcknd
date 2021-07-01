@@ -9,7 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.RodrigoMilanez.projetotecnico.domain.Clientes;
+import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
 
 @SpringBootApplication
@@ -27,10 +27,10 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		Clientes cli1= new Clientes(null, "Mario Jorge Dassoin", "marioDjambalaia@gmail.com", "99998888", "Jambalaya Ocean Drive");
-		Clientes cli2= new Clientes(null, "Augusto Carrara", "taxiscarrara@gmail.com", "88887777", "zona norte");
+		Cliente cli1= new Cliente(null, "Mario Jorge", "marioJambalaya@gmail.com", "99998888", "Jambalaya Ocean Drive");
+		Cliente cli2= new Cliente(null, "Augusto Carrara", "taxiscarrara@gmail.com", "88887777", "zona norte");
 		
-		List<Clientes> lista = new ArrayList<>();
+		List<Cliente> lista = new ArrayList<>();
 		lista.add(cli1);
 		lista.add(cli2);
 		

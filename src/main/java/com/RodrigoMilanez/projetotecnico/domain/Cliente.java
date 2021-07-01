@@ -1,6 +1,8 @@
 package com.RodrigoMilanez.projetotecnico.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Clientes implements Serializable {
+public class Cliente implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -22,11 +24,13 @@ public class Clientes implements Serializable {
 	private String telefone;
 	private String endereço;
 	
-	public Clientes () {
+	private List<OrdemDeServico> ordens = new ArrayList<>();
+	
+	public Cliente () {
 		
 	}
 
-	public Clientes(Integer id, String nome, String email, String telefone, String endereço) {
+	public Cliente(Integer id, String nome, String email, String telefone, String endereço) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -91,7 +95,7 @@ public class Clientes implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Clientes other = (Clientes) obj;
+		Cliente other = (Cliente) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -100,19 +104,20 @@ public class Clientes implements Serializable {
 		return true;
 	}
 
-
-
-
-
 	public String getEndereço() {
 		return endereço;
 	}
 
-
-
-
-
 	public void setEndereço(String endereço) {
 		this.endereço = endereço;
 	}
+
+	public List<OrdemDeServico> getOrdens() {
+		return ordens;
+	}
+
+	public void setOrdens(List<OrdemDeServico> ordens) {
+		this.ordens = ordens;
+	}
+
 }

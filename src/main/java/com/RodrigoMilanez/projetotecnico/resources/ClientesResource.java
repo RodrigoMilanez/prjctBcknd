@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RodrigoMilanez.projetotecnico.domain.Clientes;
+import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.services.ClientesService;
 
 @RestController
@@ -21,7 +21,7 @@ public class ClientesResource {
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
 		/**/
 		
-		Clientes obj = cliSer.findById(id);
+		Cliente obj = cliSer.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
