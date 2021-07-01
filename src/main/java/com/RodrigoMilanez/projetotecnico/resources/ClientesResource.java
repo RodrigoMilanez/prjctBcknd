@@ -19,12 +19,7 @@ public class ClientesResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
-		/*Clientes cli1= new Clientes(1, "Mario Jorge Dassoin", "marioDjambalaia@gmail.com", "99998888", "Jambalaya Ocean Drive");
-		Clientes cli2= new Clientes(2, "Augusto Carrara", "taxiscarrara@gmail.com", "88887777", "zona norte");
-		
-		List<Clientes> lista = new ArrayList<>();
-		lista.add(cli1);
-		lista.add(cli2);*/
+		/**/
 		
 		Clientes obj = cliSer.findById(id);
 		
