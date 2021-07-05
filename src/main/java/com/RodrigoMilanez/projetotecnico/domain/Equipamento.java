@@ -2,12 +2,14 @@ package com.RodrigoMilanez.projetotecnico.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Equipamento implements Serializable{
@@ -23,7 +25,9 @@ public class Equipamento implements Serializable{
 	private String marca;
 	private String avaria;
 	
-	@OneToOne( mappedBy = "equip" ,cascade=CascadeType.ALL)
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name= "equipamento_id")
 	private OrdemDeServico ordem;
 	
 	public Equipamento() {

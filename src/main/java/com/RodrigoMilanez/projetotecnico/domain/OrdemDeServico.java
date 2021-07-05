@@ -2,9 +2,9 @@ package com.RodrigoMilanez.projetotecnico.domain;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class OrdemDeServico {
@@ -26,14 +26,17 @@ public class OrdemDeServico {
 	
 	private Date instante;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name ="cliente_id")
 	@MapsId
 	private Cliente cli;
 	
-	@OneToOne
-	@JoinColumn(name = "equipamento_id")
-	private Equipamento equip;
+	
+	 
+	@OneToMany(mappedBy = "ordem")
+	private List<Equipamento> equipamentos = new ArrayList<>();
+	
 	
 	private double orcamento;
 	
@@ -42,14 +45,19 @@ public class OrdemDeServico {
 	}
 
 
-	public OrdemDeServico(Integer id, Date instante ,Cliente cli, Equipamento equip) {
+	 
+
+
+	public OrdemDeServico(Integer id, Date instante, Cliente cli, double orcamento) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cli = cli;
-		this.equip = equip;
-		this.setOrcamento(00.00);
+		this.orcamento = orcamento;
 	}
+
+
+
 
 
 	public double getOrcamento() {
@@ -72,14 +80,49 @@ public class OrdemDeServico {
 	}
 
 
-	public Set<Cliente> getCli() {
-		return new HashSet<Cliente>(id);
+	public Cliente getCli() {
+		return cli;
 	}
 
 
 	public void setCli(Cliente cli) {
 		this.cli = cli;
 	}
+
+
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+
+
+	public List<Equipamento> getEquipamentos() {
+		return equipamentos;
+	}
+
+
+
+
+
+	public void setEquipamentos(List<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
+	}
+
+
+	
 	
 	
 	

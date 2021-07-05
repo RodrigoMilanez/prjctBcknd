@@ -9,8 +9,8 @@ import com.RodrigoMilanez.projetotecnico.domain.Equipamento;
 import com.RodrigoMilanez.projetotecnico.repository.EquipamentosRepository;
 
 @Service
-public class EquipamentosService {
-	
+public class EquipamentoService {
+
 	@Autowired
 	private EquipamentosRepository repo;
 	
@@ -18,4 +18,7 @@ public class EquipamentosService {
 		Optional<Equipamento> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
+	
+	
+	
 }
