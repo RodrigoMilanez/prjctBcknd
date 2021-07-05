@@ -82,6 +82,14 @@ public class Equipamento implements Serializable{
 	public void setAvaria(String avaria) {
 		this.avaria = avaria;
 	}
+
+	public OrdemDeServico getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(OrdemDeServico ordem) {
+		this.ordem = ordem;
+	}
 	
 	
 	

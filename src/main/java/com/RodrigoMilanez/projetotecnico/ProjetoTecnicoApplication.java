@@ -53,6 +53,8 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		Equipamento eq1= new Equipamento(null, "Betoneira 400 litros", "Construção", "Maqtron", "Motor principal não está girando");
 		Equipamento eq2= new Equipamento(null, "Lava Louças", "Eletrodomésticos", "Brastemp", "não sai água");
 		
+		
+		
 		List<Equipamento> listaEq= new ArrayList<>();
 		
 		listaEq.add(eq1);
@@ -67,6 +69,10 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		
 		List<OrdemDeServico> listaOds= new ArrayList<>();
 		listaOds.add(ods1);
+		
+		eq1.setOrdem(ods1);
+		eq2.setOrdem(ods1);
+		
 		
 		Funcionario f1 = new Funcionario(null, "Pedrinho", "88889999", "Drex@gaymer.com", Perfil.ADMIN);
 		Funcionario f2 = new Funcionario(null, "Moreira", "99998888", "Marcelo@weeb.com", Perfil.ATENDENTE);
