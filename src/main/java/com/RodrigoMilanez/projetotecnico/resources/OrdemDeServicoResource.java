@@ -7,20 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.RodrigoMilanez.projetotecnico.domain.Cliente;
-import com.RodrigoMilanez.projetotecnico.services.ClientesService;
+import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
+import com.RodrigoMilanez.projetotecnico.services.OrdemDeServicoService;
 
 @RestController
-@RequestMapping(value="/clientes")
-public class ClientesResource {
+@RequestMapping(value="/ordens")
+public class OrdemDeServicoResource {
 
 	@Autowired
-	private ClientesService cliSer;
+	private OrdemDeServicoService odsSer;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
+		/**/
 		
-		Cliente obj = cliSer.findById(id);
+		OrdemDeServico obj = odsSer.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}

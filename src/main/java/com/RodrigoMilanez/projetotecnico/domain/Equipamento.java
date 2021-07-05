@@ -23,7 +23,7 @@ public class Equipamento implements Serializable{
 	private String marca;
 	private String avaria;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy = "equip")
+	@OneToOne( mappedBy = "equip" ,cascade=CascadeType.ALL)
 	private OrdemDeServico ordem;
 	
 	public Equipamento() {
