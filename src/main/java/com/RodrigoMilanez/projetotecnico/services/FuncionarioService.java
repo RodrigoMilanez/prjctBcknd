@@ -19,6 +19,9 @@ public class FuncionarioService {
 		return obj.orElse(null);
 	}
 	
-	
+	public Funcionario insert(Funcionario obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 	
 }
