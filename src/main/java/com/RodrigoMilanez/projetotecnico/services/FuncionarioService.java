@@ -24,4 +24,9 @@ public class FuncionarioService {
 		return repo.save(obj);
 	}
 	
+	public Funcionario update(Funcionario obj) {
+		findById(obj.getId());
+		return repo.save(obj);
+	}
+	
 }

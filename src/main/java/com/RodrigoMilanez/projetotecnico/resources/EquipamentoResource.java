@@ -18,7 +18,7 @@ public class EquipamentoResource {
 	private EquipamentoService odsSer;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
+	public ResponseEntity<Equipamento> listar(@PathVariable Integer id) {
 		/**/
 		
 		Equipamento obj = odsSer.findById(id);

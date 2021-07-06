@@ -48,10 +48,6 @@ public class OrdemDeServico {
 		
 	}
 
-
-	 
-
-
 	public OrdemDeServico(Integer id, Date instante, Cliente cli, double orcamento) {
 		super();
 		this.id = id;
@@ -60,75 +56,55 @@ public class OrdemDeServico {
 		this.orcamento = orcamento;
 	}
 
-
-
-
-
 	public double getOrcamento() {
 		return orcamento;
 	}
-
 
 	public void setOrcamento(double orcamento) {
 		this.orcamento = orcamento;
 	}
 
-
 	public Date getInstante() {
 		return instante;
 	}
-
 
 	public void setInstante(Date instante) {
 		this.instante = instante;
 	}
 
-
 	public Cliente getCli() {
 		return cli;
 	}
-
 
 	public void setCli(Cliente cli) {
 		this.cli = cli;
 	}
 
-
-
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
-
-
 	public List<Equipamento> getEquipamentos() {
 		return equipamentos;
 	}
-
-
-
-
 
 	public void setEquipamentos(List<Equipamento> equipamentos) {
 		this.equipamentos = equipamentos;
 	}
 
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
 
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
 
-
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,23 +112,7 @@ public class OrdemDeServico {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
-
-
-
-
-
-	public void setPagamento(Pagamento pagamento) {
-		this.pagamento = pagamento;
-	}
-
-
-
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -170,6 +130,4 @@ public class OrdemDeServico {
 		return true;
 	}
 
-
-	
 }

@@ -22,7 +22,7 @@ public class FuncionarioResource {
 	private FuncionarioService funSer;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
+	public ResponseEntity<Funcionario> listar(@PathVariable Integer id) {
 		
 		Funcionario obj = funSer.findById(id);
 		
@@ -35,5 +35,12 @@ public class FuncionarioResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Funcionario obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = funSer.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 }
