@@ -14,11 +14,15 @@ import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.Equipamento;
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
+import com.RodrigoMilanez.projetotecnico.domain.Pagamento;
+import com.RodrigoMilanez.projetotecnico.domain.PagamentoComCartão;
+import com.RodrigoMilanez.projetotecnico.domain.enums.EstadoPagamento;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
 import com.RodrigoMilanez.projetotecnico.repository.EquipamentosRepository;
 import com.RodrigoMilanez.projetotecnico.repository.FuncionarioRepository;
 import com.RodrigoMilanez.projetotecnico.repository.OrdensDeServicoRepository;
+import com.RodrigoMilanez.projetotecnico.repository.PagamentoRepository;
 
 @SpringBootApplication
 public class ProjetoTecnicoApplication implements CommandLineRunner{
@@ -34,6 +38,9 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private FuncionarioRepository funRep;
+	
+	@Autowired
+	private PagamentoRepository pagRep;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoTecnicoApplication.class, args);
@@ -61,7 +68,7 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		listaEq.add(eq2);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		OrdemDeServico ods1 = new OrdemDeServico(null, sdf.parse("02/07/2021 09:13"), cli1, 00.00);
+		OrdemDeServico ods1 = new OrdemDeServico(null, sdf.parse("02/07/2021 09:13"), cli1, 145.00);
 		
 		ods1.getEquipamentos().addAll(Arrays.asList(eq1, eq2));
 	
@@ -73,6 +80,8 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		eq1.setOrdem(ods1);
 		eq2.setOrdem(ods1);
 		
+		Pagamento pgto1= new PagamentoComCartão(null, EstadoPagamento.PENDENTE, ods1, 8);
+		ods1.setPagamento(pgto1);
 		
 		Funcionario f1 = new Funcionario(null, "Pedrinho", "88889999", "Drex@gaymer.com", Perfil.ADMIN);
 		Funcionario f2 = new Funcionario(null, "Moreira", "99998888", "Marcelo@weeb.com", Perfil.ATENDENTE);
@@ -82,6 +91,7 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		odsRep.saveAll(Arrays.asList(ods1));		
 		cliRep.saveAll(Arrays.asList(cli1,cli2));
 		equiRep.saveAll(Arrays.asList(eq1,eq2));
+		pagRep.saveAll(Arrays.asList(pgto1));
 	}
 
 }
