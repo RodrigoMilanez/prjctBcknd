@@ -29,4 +29,10 @@ public class FuncionarioService {
 		return repo.save(obj);
 	}
 	
+	public Void delete(Integer id) {
+		findById(id);
+		repo.deleteById(id);
+		return null;
+	}
+	
 }
