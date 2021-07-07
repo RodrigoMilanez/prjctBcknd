@@ -1,5 +1,6 @@
 package com.RodrigoMilanez.projetotecnico.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,7 @@ public class FuncionarioService {
 		return null;
 	}
 	
+	public List<Funcionario> findAll(){
+		return repo.findAll();
+	}
 }

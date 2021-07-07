@@ -1,6 +1,7 @@
 package com.RodrigoMilanez.projetotecnico.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +49,13 @@ public class FuncionarioResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		funSer.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Funcionario>> listarTodos() {
+		
+		List<Funcionario> obj = funSer.findAll();
+		
+		return ResponseEntity.ok().body(obj);
 	}
 }
