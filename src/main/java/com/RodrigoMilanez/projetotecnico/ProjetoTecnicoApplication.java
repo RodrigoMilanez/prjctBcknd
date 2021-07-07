@@ -86,8 +86,13 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		Funcionario f1 = new Funcionario(null, "Pedrinho", "88889999", "Drex@gaymer.com", Perfil.ADMIN);
 		Funcionario f2 = new Funcionario(null, "Moreira", "99998888", "Marcelo@weeb.com", Perfil.ATENDENTE);
 		Funcionario f3 = new Funcionario(null, "Paulo", "88889999", "paulao@regulagem.com", Perfil.TECNICO);
+		Funcionario f4 = new Funcionario(null, "Jaime", "78492154", "jaimeralperte@dndmf.com", Perfil.TECNICO);
+		Funcionario f5 = new Funcionario(null, "Angela", "84751865", "angelaquislene@dndmf.cm", Perfil.ATENDENTE);
+		Funcionario f6 = new Funcionario(null, "Maicon", "87579875", "maiconescort@dndmf.com", Perfil.TECNICO);
+		Funcionario f7 = new Funcionario(null, "Lesni", "88889999", "Lesni@parquesdp.com", Perfil.ATENDENTE);
 
-		funRep.saveAll(Arrays.asList(f1, f2, f3));
+		
+		funRep.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6, f7));
 		odsRep.saveAll(Arrays.asList(ods1));		
 		cliRep.saveAll(Arrays.asList(cli1,cli2));
 		equiRep.saveAll(Arrays.asList(eq1,eq2));
