@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
+import com.RodrigoMilanez.projetotecnico.domain.dto.NewFuncionarioDTO;
 import com.RodrigoMilanez.projetotecnico.repository.FuncionarioRepository;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.DataIntegrityException;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundException;
@@ -57,6 +58,10 @@ public class FuncionarioService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),
 				orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Funcionario fromDTO(NewFuncionarioDTO  objDto) {
+		return new Funcionario(objDto.getId(), objDto.getNome(), objDto.getTelefone(), objDto.getEmail(), objDto.getPerfil());
 	}
 	
 	

@@ -2,6 +2,8 @@ package com.RodrigoMilanez.projetotecnico.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
+import com.RodrigoMilanez.projetotecnico.domain.dto.FuncionarioDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.NewFuncionarioDTO;
 import com.RodrigoMilanez.projetotecnico.services.FuncionarioService;
 
 @RestController
@@ -32,7 +36,8 @@ public class FuncionarioResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Funcionario obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody NewFuncionarioDTO objDto){
+		Funcionario obj = funSer.fromDTO(objDto);
 		obj = funSer.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -53,12 +58,13 @@ public class FuncionarioResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<Page<Funcionario>> listarTodos(
+	public ResponseEntity<Page<FuncionarioDTO>> listarTodos(
 			@RequestParam(value = "page" , defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage" , defaultValue = "24")Integer linesPerPage,
 			@RequestParam(value = "orderBy" , defaultValue = "nome")String orderBy, 
 			@RequestParam(value = "direction" , defaultValue = "ASC")String direction) {
-		Page<Funcionario> obj = funSer.findPage(page, linesPerPage, orderBy, direction);
-		return ResponseEntity.ok().body(obj);
+		Page<Funcionario> list = funSer.findPage(page, linesPerPage, orderBy, direction);
+		Page<FuncionarioDTO> listDTO = list.map(obj -> new FuncionarioDTO(obj));
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
