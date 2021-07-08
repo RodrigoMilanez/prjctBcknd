@@ -2,14 +2,14 @@ package com.RodrigoMilanez.projetotecnico.domain.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
 
 import org.hibernate.validator.constraints.Length;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 public class NewFuncionarioDTO implements Serializable{
 
@@ -21,17 +21,16 @@ public class NewFuncionarioDTO implements Serializable{
 	@Length(min=5, max=80, message="O tamanho deve ter de 5 a 80 caracteres")
 	private String nome;
 	
-	@JsonIgnore
-	@NotEmpty(message="Este campo deve ser preenchido")
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Email(message = "Email inválido")
 	private String email;
 	
+	@NotNull
 	private Perfil perfil;
 	
-	@JsonIgnore
+	@NotEmpty(message="Este campo deve ser preenchido")
 	private String telefone;
-	
-	
-	
+		
 	public NewFuncionarioDTO() {
 		
 	}
@@ -84,6 +83,5 @@ public class NewFuncionarioDTO implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
+		
  }
