@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -39,5 +40,12 @@ public class ResourceExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
+	
+	@ExceptionHandler(TransactionSystemException.class)
+	public ResponseEntity<StandardError> transactional(TransactionSystemException e, HttpServletRequest request){
+		ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
 }
 

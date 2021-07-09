@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 
 
@@ -22,8 +24,10 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
+	@NotEmpty
 	private String nome;
+	@NotEmpty
+	@Email
 	private String email;
 	private String telefone;
 	private String endereço;

@@ -36,7 +36,8 @@ public class FuncionarioService {
 	}
 	
 	public Funcionario update(Funcionario obj) {
-		findById(obj.getId());
+		Funcionario newObj = findById(obj.getId());
+		updateData(newObj,obj);
 		return repo.save(obj);
 	}
 	
@@ -64,5 +65,9 @@ public class FuncionarioService {
 		return new Funcionario(objDto.getId(), objDto.getNome(), objDto.getTelefone(), objDto.getEmail(), objDto.getPerfil());
 	}
 	
+	public void updateData(Funcionario newObj, Funcionario obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
+	}
 	
 }
