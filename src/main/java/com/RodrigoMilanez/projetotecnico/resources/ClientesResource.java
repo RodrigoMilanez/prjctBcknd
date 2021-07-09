@@ -1,13 +1,17 @@
 package com.RodrigoMilanez.projetotecnico.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
+import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
 import com.RodrigoMilanez.projetotecnico.services.ClientesService;
 
 @RestController
@@ -23,5 +27,29 @@ public class ClientesResource {
 		Cliente obj = cliSer.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Cliente obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = cliSer.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		cliSer.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<Page<ClienteDTO>> listarTodos(
+			@RequestParam(value = "page" , defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage" , defaultValue = "24")Integer linesPerPage,
+			@RequestParam(value = "orderBy" , defaultValue = "nome")String orderBy, 
+			@RequestParam(value = "direction" , defaultValue = "ASC")String direction) {
+		Page<Cliente> list = cliSer.findPage(page, linesPerPage, orderBy, direction);
+		Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
