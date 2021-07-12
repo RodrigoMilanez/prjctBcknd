@@ -49,7 +49,7 @@ public class ClientesService {
 	}
 	
 	public Cliente fromDTO(ClienteDTO  objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null); 
+		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null,null); 
 	}
 	
 
@@ -65,7 +65,7 @@ public class ClientesService {
 	}
 	
 	public Cliente fromDTO(ClienteNewDto  objDto) {
-		return new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone(), objDto.getEndereço()); 
+		return new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone(), objDto.getEndereço(), objDto.getCpf()); 
 	}
 	
 	

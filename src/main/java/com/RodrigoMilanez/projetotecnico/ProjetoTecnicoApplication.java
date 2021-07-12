@@ -50,8 +50,8 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//instanciando clientes
-		Cliente cli1= new Cliente(null, "Mario Jorge", "marioJambalaya@gmail.com", "99998888", "Jambalaya Ocean Drive");
-		Cliente cli2= new Cliente(null, "Augusto Carrara", "taxiscarrara@gmail.com", "88887777", "zona norte");
+		Cliente cli1= new Cliente(null, "Mario Jorge", "marioJambalaya@gmail.com", "99998888", "Jambalaya Ocean Drive","62091740004");
+		Cliente cli2= new Cliente(null, "Augusto Carrara", "taxiscarrara@gmail.com", "88887777", "zona norte","24089330050");
 		//adicionando clientes a uma lista
 		List<Cliente> lista = new ArrayList<>();
 		lista.add(cli1);

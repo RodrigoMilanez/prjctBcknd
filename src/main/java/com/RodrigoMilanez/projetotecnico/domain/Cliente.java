@@ -32,6 +32,9 @@ public class Cliente implements Serializable {
 	private String telefone;
 	private String endereço;
 	
+	private String cpf;
+	
+	
 	@OneToMany(mappedBy = "cli")
 	private List<OrdemDeServico> ordens = new ArrayList<>();
 	
@@ -39,13 +42,14 @@ public class Cliente implements Serializable {
 		
 	}
 
-	public Cliente(Integer id, String nome, String email, String telefone, String endereço) {
+	public Cliente(Integer id, String nome, String email, String telefone, String endereço, String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.endereço = endereço;
+		this.cpf= cpf;
 	}
 
 	public String getNome() {
@@ -127,6 +131,14 @@ public class Cliente implements Serializable {
 
 	public void setOrdens(List<OrdemDeServico> ordens) {
 		this.ordens = ordens;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }
