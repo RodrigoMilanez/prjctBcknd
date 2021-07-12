@@ -1,5 +1,10 @@
 package com.RodrigoMilanez.projetotecnico.resources;
 
+import java.net.URI;
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteNewDto;
 import com.RodrigoMilanez.projetotecnico.services.ClientesService;
 
 @RestController
@@ -51,5 +58,15 @@ public class ClientesResource {
 		Page<Cliente> list = cliSer.findPage(page, linesPerPage, orderBy, direction);
 		Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
+	}
+	
+	@Transactional
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDto objDto){
+		Cliente obj = cliSer.fromDTO(objDto);
+		obj = cliSer.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 }

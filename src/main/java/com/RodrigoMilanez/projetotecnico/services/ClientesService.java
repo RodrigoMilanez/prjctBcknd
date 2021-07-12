@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteNewDto;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
-import com.RodrigoMilanez.projetotecnico.services.exceptions.DataIntegrityException;
+import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClientesService {
@@ -23,7 +24,8 @@ public class ClientesService {
 	
 	public Cliente findById(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 	
 	public Void delete(Integer id) {
@@ -31,7 +33,7 @@ public class ClientesService {
 		try {
 		repo.deleteById(id);
 		} catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("não é possível deletar o conteúdo");
+			throw new DataIntegrityViolationException("não é possível deletar o conteúdo");
 		}
 		return null;
 	}
@@ -61,5 +63,16 @@ public class ClientesService {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 	}
+	
+	public Cliente fromDTO(ClienteNewDto  objDto) {
+		return new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone(), objDto.getEndereço()); 
+	}
+	
+	
+	public Cliente insert(Cliente obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
 	
 }
