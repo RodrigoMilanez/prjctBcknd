@@ -2,9 +2,10 @@ package com.RodrigoMilanez.projetotecnico.domain.dto;
 
 import java.io.Serializable;
 
-
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
+import com.RodrigoMilanez.projetotecnico.services.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 
 	

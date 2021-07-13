@@ -2,6 +2,7 @@ package com.RodrigoMilanez.projetotecnico.domain;
 
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,25 +43,25 @@ public class OrdemDeServico {
 	private List<Equipamento> equipamentos = new ArrayList<>();
 	
 	
-	private double orcamento;
+	private BigDecimal orcamento;
 	
 	public OrdemDeServico() {
 		
 	}
 
-	public OrdemDeServico(Integer id, Date instante, Cliente cli, double orcamento) {
+	public OrdemDeServico(Integer id, Date instante, Cliente cli, BigDecimal orcamento) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cli = cli;
-		this.orcamento = orcamento;
+		this.orcamento = new BigDecimal("0.0");
 	}
 
-	public double getOrcamento() {
+	public BigDecimal getOrcamento() {
 		return orcamento;
 	}
 
-	public void setOrcamento(double orcamento) {
+	public void setOrcamento(BigDecimal orcamento) {
 		this.orcamento = orcamento;
 	}
 
