@@ -35,7 +35,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 	
 	
-	@OneToMany(mappedBy = "cli")
+	@OneToMany(mappedBy = "cliente")
 	private List<OrdemDeServico> ordens = new ArrayList<>();
 	
 	public Cliente () {

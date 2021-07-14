@@ -3,8 +3,8 @@ package com.RodrigoMilanez.projetotecnico.domain;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +18,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -26,14 +27,14 @@ public class OrdemDeServico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	private Date instante;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime instante = LocalDateTime.now();
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name ="cliente_id")
 	@MapsId
-	private Cliente cli;
+	private Cliente cliente;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "ods")
 	private Pagamento pagamento;
@@ -46,15 +47,13 @@ public class OrdemDeServico {
 	private BigDecimal orcamento;
 	
 	public OrdemDeServico() {
-		
 	}
 
-	public OrdemDeServico(Integer id, Date instante, Cliente cli, BigDecimal orcamento) {
+	public OrdemDeServico(Cliente cli, Pagamento pagamento) {
 		super();
-		this.id = id;
-		this.instante = instante;
-		this.cli = cli;
+		this.cliente = cli;
 		this.orcamento = new BigDecimal("0.0");
+		this.pagamento = pagamento;
 	}
 
 	public BigDecimal getOrcamento() {
@@ -65,20 +64,13 @@ public class OrdemDeServico {
 		this.orcamento = orcamento;
 	}
 
-	public Date getInstante() {
-		return instante;
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setInstante(Date instante) {
-		this.instante = instante;
-	}
-
-	public Cliente getCli() {
-		return cli;
-	}
-
-	public void setCli(Cliente cli) {
-		this.cli = cli;
+	public void setCliente(Cliente cli) {
+		this.cliente = cli;
 	}
 
 	public Integer getId() {
@@ -129,6 +121,14 @@ public class OrdemDeServico {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public LocalDateTime getInstante() {
+		return instante;
+	}
+
+	public void setInstante(LocalDateTime instante) {
+		this.instante = instante;
 	}
 
 }

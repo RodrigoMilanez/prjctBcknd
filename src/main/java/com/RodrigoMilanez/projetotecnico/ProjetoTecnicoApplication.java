@@ -1,7 +1,6 @@
 package com.RodrigoMilanez.projetotecnico;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,8 +67,8 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		listaEq.add(eq1);
 		listaEq.add(eq2);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		OrdemDeServico ods1 = new OrdemDeServico(null, sdf.parse("02/07/2021 09:13"), cli1, null);
+		
+		OrdemDeServico ods1 = new OrdemDeServico(cli1, null);
 		ods1.setOrcamento(new BigDecimal("1456"));
 		ods1.getEquipamentos().addAll(Arrays.asList(eq1, eq2));
 	
