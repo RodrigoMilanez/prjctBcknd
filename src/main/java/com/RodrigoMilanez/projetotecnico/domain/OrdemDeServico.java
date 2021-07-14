@@ -18,8 +18,11 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.RodrigoMilanez.projetotecnico.domain.enums.Status;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class OrdemDeServico {
@@ -29,6 +32,8 @@ public class OrdemDeServico {
 	private Integer id;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime instante = LocalDateTime.now();
+	
+	private Status status;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -54,6 +59,7 @@ public class OrdemDeServico {
 		this.cliente = cli;
 		this.orcamento = new BigDecimal("0.0");
 		this.pagamento = pagamento;
+		this.status = Status.DIAGNÓSTICO;
 	}
 
 	public BigDecimal getOrcamento() {
@@ -129,6 +135,14 @@ public class OrdemDeServico {
 
 	public void setInstante(LocalDateTime instante) {
 		this.instante = instante;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }
