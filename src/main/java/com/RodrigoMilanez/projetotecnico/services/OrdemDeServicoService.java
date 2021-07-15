@@ -1,8 +1,6 @@
 package com.RodrigoMilanez.projetotecnico.services;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,9 +82,17 @@ public class OrdemDeServicoService {
 		if (newObj.getStatus().equals(Status.RECUSADO)) {
 			newObj.getPagamento().setEstado(EstadoPagamento.CANCELADO);
 		}
-		return newObj;
+		return repo.save(newObj);
 	}
 	
+	public OrdemDeServico concluir(Integer id, Status status) {
+		OrdemDeServico newObj= findById(id);
+		newObj.setStatus(status);
+		
+		newObj.getPagamento().setEstado(EstadoPagamento.QUITADO);
+		
+		return repo.save(newObj);
+	}
 	
 	public OrdemDeServico update(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
@@ -95,7 +101,7 @@ public class OrdemDeServicoService {
 	}
 	
 	
-	public OrdemDeServico updateStatus(OrdemDeServico obj) {
+	public OrdemDeServico updateDiagnostico(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
 		updateData(newObj, obj);
@@ -106,8 +112,6 @@ public class OrdemDeServicoService {
 	
 	
 	public void updateData(OrdemDeServico newObj, OrdemDeServico obj) {
-		
-		
 		for (Equipamento eq: obj.getEquipamentos()) {
 			for (Equipamento newEq: newObj.getEquipamentos()) {
 				if (eq.getId() == newEq.getId()) {
@@ -117,18 +121,8 @@ public class OrdemDeServicoService {
 					eqRep.save(newEq);
 				}	
 			}
-		}
-		
-		
-		/*for (Equipamento eqObj: obj.getEquipamentos()) {
-			for (Equipamento eqNewObj: newObj.getEquipamentos()) {
-				if(eqObj.getId() == eqNewObj.getId()) {
-					eqObj.setNome(eqNewObj.getNome());
-				}
-			}
-		}*/
-		
-		/*newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());*/
+		}	
 	}
+	
+	
 }

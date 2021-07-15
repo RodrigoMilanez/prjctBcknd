@@ -43,15 +43,14 @@ public class OrdemDeServicoResource {
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
 	//atualiza o status
 	@RequestMapping(value="/{id}/diagnostico", method=RequestMethod.PUT)
 	public ResponseEntity<Void> updateStatus(@RequestBody OrdemDeServico obj, @PathVariable Integer id) {
 		obj.setId(id);
-		obj = odsSer.updateStatus(obj);
+		obj = odsSer.updateDiagnostico(obj);
 		return ResponseEntity.noContent().build();
 	}
-	//atualiza a ordem com avarias do equipamento
-	
 	
 	//== cliente decide se prossegue com a ordem ou se cancela 
 	@RequestMapping(value="/{id}/aprovado", method=RequestMethod.GET)
@@ -63,6 +62,14 @@ public class OrdemDeServicoResource {
 	@RequestMapping(value="/{id}/recusado", method=RequestMethod.GET)
 	public ResponseEntity<OrdemDeServico> recusar(@PathVariable Integer id, Status status) {
 		OrdemDeServico obj = odsSer.respostaCliente(id, Status.RECUSADO);
+		return ResponseEntity.ok().body(obj);
+	}
+	//== depois ajustar para funcionar com emails
+	
+	
+	@RequestMapping(value="/{id}/concluir", method=RequestMethod.GET)
+	public ResponseEntity<OrdemDeServico> concluir(@PathVariable Integer id, Status status) {
+		OrdemDeServico obj = odsSer.concluir(id, status.CONCLUÍDO);
 		return ResponseEntity.ok().body(obj);
 	}
 	//== depois ajustar para funcionar com emails
