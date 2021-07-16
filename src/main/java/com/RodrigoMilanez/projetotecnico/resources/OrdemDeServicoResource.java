@@ -72,4 +72,10 @@ public class OrdemDeServicoResource {
 	}
 	//== depois ajustar para funcionar com emails
 		
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		odsSer.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

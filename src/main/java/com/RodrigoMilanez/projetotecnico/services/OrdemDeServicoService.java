@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
@@ -17,6 +18,8 @@ import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
 import com.RodrigoMilanez.projetotecnico.repository.EquipamentosRepository;
 import com.RodrigoMilanez.projetotecnico.repository.OrdensDeServicoRepository;
 import com.RodrigoMilanez.projetotecnico.repository.PagamentoRepository;
+import com.RodrigoMilanez.projetotecnico.services.exceptions.DataIntegrityException;
+import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class OrdemDeServicoService {
@@ -41,9 +44,9 @@ public class OrdemDeServicoService {
 
 	public OrdemDeServico findById(Integer id) {
 		Optional<OrdemDeServico> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + OrdemDeServico.class.getName()));
 	}
-	
 	
 	public OrdemDeServico fromDTO(OrdemDeServiçoDTO objDto) {
 		Cliente cliente = cliSer.findById(objDto.getClienteId());
@@ -68,14 +71,7 @@ public class OrdemDeServicoService {
 		OrdemDeServico os = fromDTO(objDto);
 		return repo.save(os);
 	}
-	
-	
-	
-	/*else if (newObj.getStatus().equals(Status.REPARO)){
-	newObj.setStatus(Status.CONCLUÍDO);	
-	newObj.getPagamento().setEstado(EstadoPagamento.QUITADO);
-}	*/
-	
+		
 	public OrdemDeServico respostaCliente(Integer id, Status status) {
 		OrdemDeServico newObj= findById(id);
 		newObj.setStatus(status);
@@ -100,7 +96,6 @@ public class OrdemDeServicoService {
 		return repo.save(obj);
 	}
 	
-	
 	public OrdemDeServico updateDiagnostico(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
@@ -124,5 +119,14 @@ public class OrdemDeServicoService {
 		newObj.setOrcamento(obj.getOrcamento());
 	}
 	
+	public Void delete(Integer id) {
+		findById(id);
+		try {
+		repo.deleteById(id);
+		} catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("não é possível deletar o conteúdo");
+		}
+		return null;
+	}
 	
 }

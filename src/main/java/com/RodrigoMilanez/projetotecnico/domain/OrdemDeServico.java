@@ -45,7 +45,7 @@ public class OrdemDeServico {
 	private Pagamento pagamento;
 	
 	 
-	@OneToMany(mappedBy = "ordem")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ordem")
 	private List<Equipamento> equipamentos = new ArrayList<>();
 	
 	
