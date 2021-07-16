@@ -70,4 +70,12 @@ public class FuncionarioService {
 		newObj.setEmail(obj.getEmail());
 	}
 	
+	/*obj.getEquipamentos().forEach(eq -> {
+		if (!newObj.getEquipamentos().contains(eq)) {
+			eqRep.deleteById(eq.getId());
+		}
+	});
+	newObj.setOrcamento(obj.getOrcamento());
+	repo.save(newObj);*/
+	
 }

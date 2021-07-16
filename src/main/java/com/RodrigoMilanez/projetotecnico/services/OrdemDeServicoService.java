@@ -48,6 +48,16 @@ public class OrdemDeServicoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + OrdemDeServico.class.getName()));
 	}
 	
+	public Void delete(Integer id) {
+		findById(id);
+		try {
+		repo.deleteById(id);
+		} catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("não é possível deletar o conteúdo");
+		}
+		return null;
+	}
+	
 	public OrdemDeServico fromDTO(OrdemDeServiçoDTO objDto) {
 		Cliente cliente = cliSer.findById(objDto.getClienteId());
 		cliRep.save(cliente);
@@ -90,20 +100,20 @@ public class OrdemDeServicoService {
 		return repo.save(newObj);
 	}
 	
-	public OrdemDeServico update(OrdemDeServico obj) {
+	
+	/*public OrdemDeServico update(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
 		updateData(newObj,obj);
 		return repo.save(obj);
-	}
+	}*/
 	
 	public OrdemDeServico updateDiagnostico(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
 		updateData(newObj, obj);
 		obj.setStatus(newObj.getStatus());
-		return repo.save(obj);		
+		return repo.save(newObj);		
 	}
-	
 	
 	public void updateData(OrdemDeServico newObj, OrdemDeServico obj) {
 		for (Equipamento eq: obj.getEquipamentos()) {
@@ -119,14 +129,5 @@ public class OrdemDeServicoService {
 		newObj.setOrcamento(obj.getOrcamento());
 	}
 	
-	public Void delete(Integer id) {
-		findById(id);
-		try {
-		repo.deleteById(id);
-		} catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("não é possível deletar o conteúdo");
-		}
-		return null;
-	}
 	
 }
