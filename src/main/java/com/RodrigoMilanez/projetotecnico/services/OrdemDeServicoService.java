@@ -106,7 +106,6 @@ public class OrdemDeServicoService {
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
 		updateData(newObj, obj);
 		obj.setStatus(newObj.getStatus());
-		
 		return repo.save(obj);		
 	}
 	
@@ -121,7 +120,8 @@ public class OrdemDeServicoService {
 					eqRep.save(newEq);
 				}	
 			}
-		}	
+		}
+		newObj.setOrcamento(obj.getOrcamento());
 	}
 	
 	

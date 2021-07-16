@@ -64,14 +64,12 @@ public class OrdemDeServicoResource {
 		OrdemDeServico obj = odsSer.respostaCliente(id, Status.RECUSADO);
 		return ResponseEntity.ok().body(obj);
 	}
-	//== depois ajustar para funcionar com emails
-	
 	
 	@RequestMapping(value="/{id}/concluir", method=RequestMethod.GET)
 	public ResponseEntity<OrdemDeServico> concluir(@PathVariable Integer id, Status status) {
-		OrdemDeServico obj = odsSer.concluir(id, status.CONCLUÍDO);
+		OrdemDeServico obj = odsSer.concluir(id, Status.CONCLUÍDO);
 		return ResponseEntity.ok().body(obj);
 	}
 	//== depois ajustar para funcionar com emails
-	
+		
 }

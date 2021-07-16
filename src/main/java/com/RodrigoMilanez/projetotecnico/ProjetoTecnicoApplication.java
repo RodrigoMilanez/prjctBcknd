@@ -1,6 +1,5 @@
 package com.RodrigoMilanez.projetotecnico;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,7 +68,6 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		
 		
 		OrdemDeServico ods1 = new OrdemDeServico(cli1, null);
-		ods1.setOrcamento(new BigDecimal("1456"));
 		ods1.getEquipamentos().addAll(Arrays.asList(eq1, eq2));
 	
 		cli1.getOrdens().addAll(Arrays.asList(ods1));
