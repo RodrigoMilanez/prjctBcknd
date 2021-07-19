@@ -65,11 +65,7 @@ public class OrdemDeServicoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(value="/{id}/concluir", method=RequestMethod.GET)
-	public ResponseEntity<OrdemDeServico> concluir(@PathVariable Integer id, Status status) {
-		OrdemDeServico obj = odsSer.concluir(id, Status.CONCLUÍDO);
-		return ResponseEntity.ok().body(obj);
-	}
+	
 	//== depois ajustar para funcionar com emails
 		
 	
@@ -78,4 +74,12 @@ public class OrdemDeServicoResource {
 		odsSer.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	// == conclui a ordem de serviço
+	@RequestMapping(value="/{id}/concluir", method=RequestMethod.GET)
+	public ResponseEntity<OrdemDeServico> concluir(@PathVariable Integer id, Status status) {
+		OrdemDeServico obj = odsSer.concluir(id, Status.CONCLUÍDO);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 }

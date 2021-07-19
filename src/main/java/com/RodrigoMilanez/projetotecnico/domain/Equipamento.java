@@ -1,6 +1,7 @@
 package com.RodrigoMilanez.projetotecnico.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class Equipamento implements Serializable{
 	private String tipo;
 	private String marca;
 	private String avaria;
+	private BigDecimal orcamento;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -89,6 +91,14 @@ public class Equipamento implements Serializable{
 
 	public void setOrdem(OrdemDeServico ordem) {
 		this.ordem = ordem;
+	}
+
+	public BigDecimal getOrcamento() {
+		return orcamento;
+	}
+
+	public void setOrcamento(BigDecimal orçamento) {
+		this.orcamento = orçamento;
 	}
 	
 	

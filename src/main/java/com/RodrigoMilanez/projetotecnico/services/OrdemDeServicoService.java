@@ -1,5 +1,6 @@
 package com.RodrigoMilanez.projetotecnico.services;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
@@ -110,24 +111,35 @@ public class OrdemDeServicoService {
 	public OrdemDeServico updateDiagnostico(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
-		updateData(newObj, obj);
-		obj.setStatus(newObj.getStatus());
+		updateData(obj,newObj);
 		return repo.save(newObj);		
 	}
 	
-	public void updateData(OrdemDeServico newObj, OrdemDeServico obj) {
+	public void updateData(OrdemDeServico obj , OrdemDeServico newObj) {
+		BigDecimal orcamentoODS = new BigDecimal(0);
 		for (Equipamento eq: obj.getEquipamentos()) {
 			for (Equipamento newEq: newObj.getEquipamentos()) {
 				if (eq.getId() == newEq.getId()) {
 					newEq.setNome(eq.getNome());
 					newEq.setAvaria(eq.getAvaria());	
 					newEq.setOrdem(obj);
+					newEq.setOrcamento(eq.getOrcamento());
 					eqRep.save(newEq);
-				}	
+					orcamentoODS = orcamentoODS.add(newEq.getOrcamento());
+				}
 			}
-		}
-		newObj.setOrcamento(obj.getOrcamento());
+		}	
+		newObj.setOrcamento(orcamentoODS);
 	}
 	
 	
+	public void deletaEquipamento(OrdemDeServico obj){
+		OrdemDeServico ordemAnterior = this.findById(obj.getId());
+		for (Equipamento eq: ordemAnterior.getEquipamentos()) {
+				if (!obj.getEquipamentos().contains(eq)) {
+					eqRep.deleteById(eq.getId());
+			}
+		}
+	}
+	//================================================ARRUMAR ENDPOINT PRA DELETAR OS EQUIPAMENTOS
 }
