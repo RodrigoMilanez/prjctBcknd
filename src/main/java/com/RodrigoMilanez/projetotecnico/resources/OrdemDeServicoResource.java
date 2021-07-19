@@ -82,4 +82,13 @@ public class OrdemDeServicoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	
+	
+	//um problemo resolvido, 30239204982 pra ir
+	/*@RequestMapping(value="/{id}/deletarEquipamento/{idEq}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deletaEquipamento(@RequestBody OrdemDeServico obj, @PathVariable Integer id,Integer idEq) {
+		obj.setId(id);
+		obj = odsSer.deletarEquipamento(obj, idEq);
+		return ResponseEntity.noContent().build();
+	}*/
 }

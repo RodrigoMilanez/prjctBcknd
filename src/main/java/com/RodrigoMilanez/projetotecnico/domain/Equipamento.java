@@ -29,7 +29,8 @@ public class Equipamento implements Serializable{
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name= "equipamento_id")
+	@JoinColumn(name= "ordem_id")
+	
 	private OrdemDeServico ordem;
 	
 	public Equipamento() {

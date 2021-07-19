@@ -101,13 +101,6 @@ public class OrdemDeServicoService {
 		return repo.save(newObj);
 	}
 	
-	
-	/*public OrdemDeServico update(OrdemDeServico obj) {
-		OrdemDeServico newObj = findById(obj.getId());
-		updateData(newObj,obj);
-		return repo.save(obj);
-	}*/
-	
 	public OrdemDeServico updateDiagnostico(OrdemDeServico obj) {
 		OrdemDeServico newObj = findById(obj.getId());
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
@@ -132,14 +125,24 @@ public class OrdemDeServicoService {
 		newObj.setOrcamento(orcamentoODS);
 	}
 	
+	//Nenhum dos abaixo funfou
 	
-	public void deletaEquipamento(OrdemDeServico obj){
+	/*public OrdemDeServico deletarEquipamento(OrdemDeServico obj,Integer eqId) {
+		OrdemDeServico ordemAnterior = this.findById(obj.getId());
+		eqRep.deleteById(eqId);
+		return repo.save(obj);
+		
+	}*/
+	
+	/*public OrdemDeServico deletaEquipamento(OrdemDeServico obj){
 		OrdemDeServico ordemAnterior = this.findById(obj.getId());
 		for (Equipamento eq: ordemAnterior.getEquipamentos()) {
 				if (!obj.getEquipamentos().contains(eq)) {
 					eqRep.deleteById(eq.getId());
+					repo.save(obj); 
 			}
 		}
-	}
-	//================================================ARRUMAR ENDPOINT PRA DELETAR OS EQUIPAMENTOS
+		return repo.save(obj);
+	}*/
+	
 }

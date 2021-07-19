@@ -56,8 +56,11 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		lista.add(cli1);
 		lista.add(cli2);
 	
+		OrdemDeServico ods1 = new OrdemDeServico(cli1, null);
+		
 		Equipamento eq1= new Equipamento(null, "Betoneira 400 litros", "Construção", "Maqtron", "Motor principal não está girando");
 		Equipamento eq2= new Equipamento(null, "Lava Louças", "Eletrodomésticos", "Brastemp", "não sai água");
+		Equipamento eq3= new Equipamento(null, "Computador Gaymer", "Computadores", "RedDragon", "Cheiro de queimado");
 		
 		
 		
@@ -65,10 +68,10 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		
 		listaEq.add(eq1);
 		listaEq.add(eq2);
+		listaEq.add(eq3);
 		
 		
-		OrdemDeServico ods1 = new OrdemDeServico(cli1, null);
-		ods1.getEquipamentos().addAll(Arrays.asList(eq1, eq2));
+		ods1.setEquipamentos(listaEq);
 	
 		cli1.getOrdens().addAll(Arrays.asList(ods1));
 		
@@ -77,6 +80,7 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		
 		eq1.setOrdem(ods1);
 		eq2.setOrdem(ods1);
+		eq3.setOrdem(ods1);
 		
 		Pagamento pgto1= new PagamentoComCartão(null, EstadoPagamento.PENDENTE, ods1, 8);
 		ods1.setPagamento(pgto1);
@@ -93,7 +97,7 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		funRep.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6, f7));
 		odsRep.saveAll(Arrays.asList(ods1));		
 		cliRep.saveAll(Arrays.asList(cli1,cli2));
-		equiRep.saveAll(Arrays.asList(eq1,eq2));
+		equiRep.saveAll(Arrays.asList(eq1,eq2,eq3));
 		pagRep.saveAll(Arrays.asList(pgto1));
 	}
 
