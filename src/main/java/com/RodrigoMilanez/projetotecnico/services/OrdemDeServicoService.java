@@ -41,6 +41,9 @@ public class OrdemDeServicoService {
 	private ClientesService cliSer;
 	
 	@Autowired
+	private EquipamentoService eqSer;
+	
+	@Autowired
 	private BoletoService boletoService;
 
 	public OrdemDeServico findById(Integer id) {
@@ -80,6 +83,7 @@ public class OrdemDeServicoService {
 	
 	public OrdemDeServico insert(OrdemDeServiçoDTO objDto) {
 		OrdemDeServico os = fromDTO(objDto);
+		System.out.println(os);
 		return repo.save(os);
 	}
 		
@@ -125,24 +129,11 @@ public class OrdemDeServicoService {
 		newObj.setOrcamento(orcamentoODS);
 	}
 	
-	//Nenhum dos abaixo funfou
-	
-	/*public OrdemDeServico deletarEquipamento(OrdemDeServico obj,Integer eqId) {
-		OrdemDeServico ordemAnterior = this.findById(obj.getId());
-		eqRep.deleteById(eqId);
-		return repo.save(obj);
-		
-	}*/
-	
-	/*public OrdemDeServico deletaEquipamento(OrdemDeServico obj){
-		OrdemDeServico ordemAnterior = this.findById(obj.getId());
-		for (Equipamento eq: ordemAnterior.getEquipamentos()) {
-				if (!obj.getEquipamentos().contains(eq)) {
-					eqRep.deleteById(eq.getId());
-					repo.save(obj); 
-			}
+	public void deletarEquipamento(Integer idOrdem, Integer idEq){
+		OrdemDeServico ordem = this.findById(idOrdem);
+		Equipamento eq = eqSer.findById(idEq);			
+		if (eq.getOrdem().equals(ordem)) {
+			eqRep.deleteById(eq.getId());
 		}
-		return repo.save(obj);
-	}*/
-	
+	}
 }

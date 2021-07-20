@@ -145,4 +145,23 @@ public class OrdemDeServico {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(" Número da Ordem [id=");
+		builder.append(id);
+		builder.append(" OrdemDeServico [instante=");
+		builder.append(instante);
+		builder.append(", pagamento=");
+		builder.append(pagamento);
+		builder.append(", equipamentos=");
+		builder.append(equipamentos);
+		builder.append(", orcamento=");
+		builder.append(orcamento);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
+
 }
