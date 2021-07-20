@@ -129,11 +129,16 @@ public class OrdemDeServicoService {
 		newObj.setOrcamento(orcamentoODS);
 	}
 	
+	
+	
+	
 	public void deletarEquipamento(Integer idOrdem, Integer idEq){
 		OrdemDeServico ordem = this.findById(idOrdem);
 		Equipamento eq = eqSer.findById(idEq);			
 		if (eq.getOrdem().equals(ordem)) {
 			eqRep.deleteById(eq.getId());
 		}
+		updateDiagnostico(ordem);
 	}
+
 }
