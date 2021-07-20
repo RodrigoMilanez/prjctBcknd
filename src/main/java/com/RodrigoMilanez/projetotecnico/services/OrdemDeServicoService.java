@@ -139,6 +139,8 @@ public class OrdemDeServicoService {
 			eqRep.deleteById(eq.getId());
 		}
 		updateDiagnostico(ordem);
+		ordem.setStatus(Status.REPARO);
+		repo.save(ordem);
 	}
 
 }
