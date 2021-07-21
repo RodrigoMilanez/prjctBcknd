@@ -2,6 +2,8 @@ package com.RodrigoMilanez.projetotecnico.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -100,7 +102,22 @@ public class Equipamento implements Serializable{
 	public void setOrcamento(BigDecimal orçamento) {
 		this.orcamento = orçamento;
 	}
+
 	
 	
+	@Override
+	public String toString() {
+		NumberFormat nfe = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append("Equipamento [nome=");
+		builder.append(nome);
+		builder.append(", avaria=");
+		builder.append(avaria);
+		builder.append(", orcamento=");
+		builder.append(nfe.format(orcamento));
+		builder.append("]");
+		return builder.toString();
+	}
 	
+		
 }

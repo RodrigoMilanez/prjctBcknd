@@ -1,5 +1,6 @@
 package com.RodrigoMilanez.projetotecnico;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,6 +62,9 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 		Equipamento eq1= new Equipamento(null, "Betoneira 400 litros", "Construção", "Maqtron", "Motor principal não está girando");
 		Equipamento eq2= new Equipamento(null, "Lava Louças", "Eletrodomésticos", "Brastemp", "não sai água");
 		Equipamento eq3= new Equipamento(null, "Computador Gaymer", "Computadores", "RedDragon", "Cheiro de queimado");
+		eq1.setOrcamento(new BigDecimal(10));
+		eq2.setOrcamento(new BigDecimal(10));
+		eq3.setOrcamento(new BigDecimal(10));
 		
 		
 		

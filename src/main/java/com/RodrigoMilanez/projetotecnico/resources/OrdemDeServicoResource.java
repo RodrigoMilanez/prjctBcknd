@@ -79,9 +79,11 @@ public class OrdemDeServicoResource {
 		OrdemDeServico obj = odsSer.concluir(id, Status.CONCLUÍDO);
 		return ResponseEntity.ok().body(obj);
 	}
+
 	// == deleta um equipamento da ordem de serviço
 	@DeleteMapping("/{idOrdem}/equipamentos/{idEq}")
-	public ResponseEntity<Void> deletaEquipamento(@PathVariable(name = "idOrdem" ) Integer idOrdem, @PathVariable(name = "idEq" ) Integer idEq) {
+	public ResponseEntity<Void> deletaEquipamento(@PathVariable(name = "idOrdem") Integer idOrdem,
+			@PathVariable(name = "idEq") Integer idEq) {
 		odsSer.deletarEquipamento(idOrdem, idEq);
 		return ResponseEntity.noContent().build();
 	}
