@@ -45,6 +45,9 @@ public class OrdemDeServicoService {
 
 	@Autowired
 	private BoletoService boletoService;
+	
+	@Autowired
+	private EmailService emailSer;
 
 	public OrdemDeServico findById(Integer id) {
 		Optional<OrdemDeServico> obj = repo.findById(id);
@@ -110,6 +113,7 @@ public class OrdemDeServicoService {
 		OrdemDeServico newObj = findById(obj.getId());
 		newObj.setStatus(Status.AGUARDANDO_CLIENTE);
 		updateData(obj, newObj);
+		emailSer.sendOrderconfirmationemail(newObj);
 		return repo.save(newObj);
 	}
 
