@@ -82,7 +82,7 @@ public class DBService {
 		Pagamento pgto1 = new PagamentoComCartão(null, EstadoPagamento.PENDENTE, ods1, 8);
 		ods1.setPagamento(pgto1);
 
-		Funcionario f1 = new Funcionario(null, "Pedrinho", "88889999", "Drex@gaymer.com", Perfil.ADMIN, pe.encode("gamar"));
+		Funcionario f1 = new Funcionario(null, "Pedrinho", "88889999", "Drex@gaymer.com", Perfil.ADMIN, pe.encode("gamer"));
 		Funcionario f2 = new Funcionario(null, "Moreira", "99998888", "Marcelo@weeb.com", Perfil.ATENDENTE, pe.encode("mamo42096"));
 		Funcionario f3 = new Funcionario(null, "Paulo", "88889999", "paulao@regulagem.com", Perfil.TECNICO,pe.encode("bebel"));
 		Funcionario f4 = new Funcionario(null, "Jaime", "78492154", "jaimeralperte@dndmf.com", Perfil.TECNICO,pe.encode("pamelamadindong"));
