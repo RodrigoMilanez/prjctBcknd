@@ -148,5 +148,4 @@ public class OrdemDeServicoService {
 			throw new ObjectNotFoundException("Equipamento não existe");
 		}
 	}
-
 }
