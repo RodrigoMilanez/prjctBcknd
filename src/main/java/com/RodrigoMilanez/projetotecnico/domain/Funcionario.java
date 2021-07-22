@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -23,18 +24,21 @@ public class Funcionario implements Serializable {
 	private String email;
 	private Perfil perfil;
 	
+	@JsonIgnore
+	private String senha;
 	
 	public Funcionario() {
 		
 	}
 
-	public Funcionario(Integer id, String nome, String telefone, String email, Perfil perfil) {
+	public Funcionario(Integer id, String nome, String telefone, String email, Perfil perfil, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.perfil = perfil;
+		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -84,6 +88,14 @@ public class Funcionario implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -101,8 +113,5 @@ public class Funcionario implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
@@ -19,6 +20,9 @@ import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundExcep
 @Service
 public class FuncionarioService {
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	@Autowired
 	private FuncionarioRepository repo;
 	
@@ -62,7 +66,7 @@ public class FuncionarioService {
 	}
 	
 	public Funcionario fromDTO(NewFuncionarioDTO  objDto) {
-		return new Funcionario(objDto.getId(), objDto.getNome(), objDto.getTelefone(), objDto.getEmail(), objDto.getPerfil());
+		return new Funcionario(objDto.getId(), objDto.getNome(), objDto.getTelefone(), objDto.getEmail(), objDto.getPerfil(),pe.encode(objDto.getSenha()));
 	}
 	
 	public void updateData(Funcionario newObj, Funcionario obj) {

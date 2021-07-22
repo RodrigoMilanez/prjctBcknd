@@ -24,6 +24,10 @@ public class NewFuncionarioDTO implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatório")
 	@Email(message = "Email inválido")
 	private String email;
+
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String senha;
+	
 	
 	@NotNull
 	private Perfil perfil;
@@ -42,6 +46,7 @@ public class NewFuncionarioDTO implements Serializable{
 		this.telefone = obj.getTelefone();
 		this.email=(obj.getEmail());
 		this.perfil=obj.getPerfil();
+		this.senha=obj.getSenha();
 	}
 
 	public Integer getId() {
@@ -82,6 +87,14 @@ public class NewFuncionarioDTO implements Serializable{
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 		
  }
