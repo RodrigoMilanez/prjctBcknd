@@ -1,8 +1,14 @@
 package com.RodrigoMilanez.projetotecnico.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +28,10 @@ public class Funcionario implements Serializable {
 	private String nome;
 	private String telefone;
 	private String email;
-	private Perfil perfil;
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 	
 	@JsonIgnore
 	private String senha;
@@ -31,13 +40,12 @@ public class Funcionario implements Serializable {
 		
 	}
 
-	public Funcionario(Integer id, String nome, String telefone, String email, Perfil perfil, String senha) {
+	public Funcionario(Integer id, String nome, String telefone, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.perfil = perfil;
 		this.senha = senha;
 	}
 
@@ -73,12 +81,12 @@ public class Funcionario implements Serializable {
 		this.email = email;
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Set<Perfil> getPerfil() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void setPerfil(Set<Integer> perfil) {
+		this.perfis = perfil;
 	}
 
 	@Override
@@ -95,6 +103,10 @@ public class Funcionario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	@Override

@@ -7,4 +7,6 @@ import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
 
+	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	Funcionario findByEmail(String email);
 }

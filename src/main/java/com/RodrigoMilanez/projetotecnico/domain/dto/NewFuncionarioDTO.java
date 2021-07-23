@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
 import com.sun.istack.NotNull;
 
@@ -30,7 +29,7 @@ public class NewFuncionarioDTO implements Serializable{
 	
 	
 	@NotNull
-	private Perfil perfil;
+	private Perfil Perfil;
 	
 	@NotEmpty(message="Este campo deve ser preenchido")
 	private String telefone;
@@ -39,15 +38,7 @@ public class NewFuncionarioDTO implements Serializable{
 		
 	}
 	
-	public NewFuncionarioDTO(Funcionario obj) {
-		
-		this.id = obj.getId();
-		this.nome=obj.getNome();
-		this.telefone = obj.getTelefone();
-		this.email=(obj.getEmail());
-		this.perfil=obj.getPerfil();
-		this.senha=obj.getSenha();
-	}
+	
 
 	public Integer getId() {
 		return id;
@@ -74,11 +65,11 @@ public class NewFuncionarioDTO implements Serializable{
 	}
 
 	public Perfil getPerfil() {
-		return perfil;
+		return Perfil;
 	}
 
 	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+		this.Perfil = perfil;
 	}
 
 	public String getTelefone() {

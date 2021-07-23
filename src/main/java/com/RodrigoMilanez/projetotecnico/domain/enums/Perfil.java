@@ -30,5 +30,5 @@ public enum Perfil {
 		}
 		throw new IllegalArgumentException("código inválido"+ cod);
 	}
-	
+	//dar ctrl c no jwt
 }

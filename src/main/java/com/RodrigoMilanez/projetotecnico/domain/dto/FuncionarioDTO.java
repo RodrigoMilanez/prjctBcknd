@@ -1,7 +1,7 @@
 package com.RodrigoMilanez.projetotecnico.domain.dto;
 
 import java.io.Serializable;
-
+import java.util.Set;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
@@ -13,7 +13,7 @@ public class FuncionarioDTO implements Serializable{
 	
 	private String nome;
 	
-	private Perfil perfil;
+	private Set<Perfil> perfil;
 	
 	public FuncionarioDTO() {
 		
@@ -42,11 +42,11 @@ public class FuncionarioDTO implements Serializable{
 		this.nome = nome;
 	}
 
-	public Perfil getPerfil() {
+	public Set<Perfil> getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(Perfil perfil) {
+	public void setPerfil(Set<Perfil> perfil) {
 		this.perfil = perfil;
 	}
 	
