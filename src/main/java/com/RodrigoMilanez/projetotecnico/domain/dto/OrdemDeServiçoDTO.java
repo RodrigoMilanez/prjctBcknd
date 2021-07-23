@@ -11,6 +11,8 @@ public class OrdemDeServiçoDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
+	
 	private Integer clienteId;
 	
 	private List<Equipamento> equipamentos = new ArrayList<>();
@@ -39,5 +41,13 @@ public class OrdemDeServiçoDTO implements Serializable{
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

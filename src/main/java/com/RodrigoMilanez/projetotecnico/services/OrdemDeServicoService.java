@@ -69,6 +69,7 @@ public class OrdemDeServicoService {
 		Cliente cliente = cliSer.findById(objDto.getClienteId());
 		cliRep.save(cliente);
 		OrdemDeServico os = new OrdemDeServico(cliente, objDto.getPagamento());
+		os.setId(null);
 		os.setEquipamentos(objDto.getEquipamentos());
 		for (Equipamento i : objDto.getEquipamentos()) {
 			i.setOrdem(os);

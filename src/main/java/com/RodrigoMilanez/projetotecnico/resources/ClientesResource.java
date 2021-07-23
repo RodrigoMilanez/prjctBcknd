@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ public class ClientesResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN','ATENDENTE')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Cliente obj, @PathVariable Integer id) {
 		obj.setId(id);
@@ -43,6 +45,7 @@ public class ClientesResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN','ATENDENTE')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		cliSer.delete(id);
@@ -60,6 +63,7 @@ public class ClientesResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN','ATENDENTE')")
 	@Transactional
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDto objDto){
