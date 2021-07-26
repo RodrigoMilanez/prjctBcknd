@@ -2,7 +2,7 @@ package com.RodrigoMilanez.projetotecnico.domain.enums;
 
 public enum Perfil {
 
-	ADMIN(1, "ROLE_ADM"),
+	ADMIN(1, "ROLE_ADMIN"),
 	ATENDENTE(2, "ROLE_ATENDENTE"),
 	TECNICO(3, "ROLE_TECNICO");
 	
@@ -30,5 +30,4 @@ public enum Perfil {
 		}
 		throw new IllegalArgumentException("código inválido"+ cod);
 	}
-	//dar ctrl c no jwt
 }

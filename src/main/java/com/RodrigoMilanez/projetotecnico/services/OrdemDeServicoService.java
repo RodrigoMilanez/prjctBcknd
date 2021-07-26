@@ -1,6 +1,7 @@
 package com.RodrigoMilanez.projetotecnico.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -104,6 +105,11 @@ public class OrdemDeServicoService {
 	public OrdemDeServico concluir(Integer id, Status status) {
 		OrdemDeServico newObj = findById(id);
 		newObj.setStatus(status);
+		if (newObj.getPagamento() instanceof PagamentoComBoleto) {
+			PagamentoComBoleto pagt = (PagamentoComBoleto) newObj.getPagamento();
+			LocalDateTime instante = LocalDateTime.now();
+			pagt.setDataPagamento(instante);
+		}
 
 		newObj.getPagamento().setEstado(EstadoPagamento.QUITADO);
 

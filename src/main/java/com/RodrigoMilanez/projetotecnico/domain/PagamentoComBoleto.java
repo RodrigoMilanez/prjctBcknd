@@ -1,10 +1,12 @@
 package com.RodrigoMilanez.projetotecnico.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
 
 import com.RodrigoMilanez.projetotecnico.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
@@ -12,16 +14,16 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 public class PagamentoComBoleto extends Pagamento{
 	private static final long serialVersionUID = 1L;
 	private Date dataVencimento;
-	private Date dataPagamento;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime dataPagamento = null;
 	
 	public PagamentoComBoleto() {
 		
 	}
 	
-	public PagamentoComBoleto(Integer id, EstadoPagamento estado, OrdemDeServico ods, Date dataVencimento, Date dataPagamento) {
+	public PagamentoComBoleto(Integer id, EstadoPagamento estado, OrdemDeServico ods, Date dataVencimento) {
 		super(id, estado, ods);
 		this.dataVencimento = dataVencimento;
-		this.dataPagamento = dataPagamento;
 	}
 
 
@@ -38,13 +40,13 @@ public class PagamentoComBoleto extends Pagamento{
 
 
 
-	public Date getDataPagamento() {
+	public LocalDateTime getDataPagamento() {
 		return dataPagamento;
 	}
 
 
 
-	public void setDataPagamento(Date dataPagamento) {
+	public void setDataPagamento(LocalDateTime dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
 

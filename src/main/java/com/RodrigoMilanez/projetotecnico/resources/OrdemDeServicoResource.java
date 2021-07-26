@@ -46,6 +46,7 @@ public class OrdemDeServicoResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN','TECNICO')")
 	// atualiza o status
 	@RequestMapping(value = "/{id}/diagnostico", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateStatus(@RequestBody OrdemDeServico obj, @PathVariable Integer id) {
@@ -68,21 +69,21 @@ public class OrdemDeServicoResource {
 	}
 
 	// == depois ajustar para funcionar com emails
-
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		odsSer.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
+	
 	// == conclui a ordem de serviço
 	@RequestMapping(value = "/{id}/concluir", method = RequestMethod.GET)
 	public ResponseEntity<OrdemDeServico> concluir(@PathVariable Integer id, Status status) {
 		OrdemDeServico obj = odsSer.concluir(id, Status.CONCLUÍDO);
 		return ResponseEntity.ok().body(obj);
 	}
-
 	// == deleta um equipamento da ordem de serviço
+	@PreAuthorize("hasAnyRole('ADMIN','TECNICO')")
 	@DeleteMapping("/{idOrdem}/equipamentos/{idEq}")
 	public ResponseEntity<Void> deletaEquipamento(@PathVariable(name = "idOrdem") Integer idOrdem,
 			@PathVariable(name = "idEq") Integer idEq) {
