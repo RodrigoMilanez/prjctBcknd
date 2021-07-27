@@ -15,13 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.RodrigoMilanez.projetotecnico.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class OrdemDeServico implements Serializable{
@@ -31,15 +29,14 @@ public class OrdemDeServico implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime instante = LocalDateTime.now();
 
 	private Status status;
-
-	@JsonIgnore
-	@ManyToOne
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
-	@MapsId
 	private Cliente cliente;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "ods")
@@ -53,9 +50,10 @@ public class OrdemDeServico implements Serializable{
 	public OrdemDeServico() {
 	}
 
-	public OrdemDeServico(Cliente cli, Pagamento pagamento) {
+	public OrdemDeServico(Integer Id ,Cliente cliente, Pagamento pagamento) {
 		super();
-		this.cliente = cli;
+		this.id = null;
+		this.cliente = cliente;
 		this.orcamento = new BigDecimal("0.0");
 		this.pagamento = pagamento;
 		this.status = Status.DIAGNÓSTICO;

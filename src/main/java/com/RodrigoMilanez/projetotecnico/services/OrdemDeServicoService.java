@@ -69,14 +69,14 @@ public class OrdemDeServicoService {
 	public OrdemDeServico fromDTO(OrdemDeServiçoDTO objDto) {
 		Cliente cliente = cliSer.findById(objDto.getClienteId());
 		cliRep.save(cliente);
-		OrdemDeServico os = new OrdemDeServico(cliente, objDto.getPagamento());
+		OrdemDeServico os = new OrdemDeServico(null,null, objDto.getPagamento());
+		os.setCliente(cliente);
 		os.setId(null);
 		os.setEquipamentos(objDto.getEquipamentos());
 		for (Equipamento i : objDto.getEquipamentos()) {
 			i.setOrdem(os);
 		}
 		os.getPagamento().setEstado(EstadoPagamento.PENDENTE);
-		;
 		os.getPagamento().setOds(os);
 		if (os.getPagamento() instanceof PagamentoComBoleto) {
 			PagamentoComBoleto pagt = (PagamentoComBoleto) os.getPagamento();

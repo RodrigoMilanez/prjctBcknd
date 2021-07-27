@@ -11,6 +11,7 @@ public class OrdemDeServiçoDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	private Integer Id;
 	
 	private Integer clienteId;
 	
@@ -40,6 +41,14 @@ public class OrdemDeServiçoDTO implements Serializable{
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
+	}
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
 	}
 
 	

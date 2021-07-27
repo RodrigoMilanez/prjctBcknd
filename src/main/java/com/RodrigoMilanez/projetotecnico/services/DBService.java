@@ -55,7 +55,7 @@ public class DBService {
 		lista.add(cli1);
 		lista.add(cli2);
 
-		OrdemDeServico ods1 = new OrdemDeServico(cli1, null);
+		OrdemDeServico ods1 = new OrdemDeServico(null,cli1, null);
 
 		Equipamento eq1 = new Equipamento(null, "Betoneira 400 litros", "Construção", "Maqtron",
 				"Motor principal não está girando");
