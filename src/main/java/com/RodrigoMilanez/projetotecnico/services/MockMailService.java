@@ -26,4 +26,7 @@ public class MockMailService extends AbstractEmailService{
 		LOG.info(msg.toString());
 		LOG.info("Email enviado");
 	}
+
+
+	
 }

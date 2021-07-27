@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+
+import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
+
 import org.slf4j.LoggerFactory;
 
 
@@ -34,5 +37,12 @@ public class SmtpMailService extends AbstractEmailService{
 		LOG.info("Simulando envio de mensagem");
 		jms.send(msg);
 		LOG.info("email enviado!");
+	}
+
+
+	@Override
+	public void sendNewPasswordEmail(Funcionario cliente, String newPass) {
+		// TODO Auto-generated method stub
+		
 	}
 }

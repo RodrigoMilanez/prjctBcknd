@@ -8,11 +8,12 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;				
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
 
 
@@ -67,5 +68,22 @@ public abstract class AbstractEmailService implements EmailService{
 		mmh.setSentDate(new Date());
 		mmh.setText(htmlFromTemplatePedido(obj),true);
 		return mimeMessage;
+	}
+	
+	@Override
+	public void sendNewPasswordEmail(Funcionario fun, String newPass) {
+		SimpleMailMessage sm = prepareNewPasswordEmail(fun, newPass);
+		sendEmail(sm);
+	}
+
+	
+	protected SimpleMailMessage prepareNewPasswordEmail(Funcionario fun, String newPass) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(fun.getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Solicitação de nova senha");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Nova senha: " + newPass);
+		return sm;
 	}
 }
