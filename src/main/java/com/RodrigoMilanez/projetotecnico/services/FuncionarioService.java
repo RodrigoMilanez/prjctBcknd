@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.dto.NewFuncionarioDTO;
+import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
 import com.RodrigoMilanez.projetotecnico.repository.FuncionarioRepository;
+import com.RodrigoMilanez.projetotecnico.security.UserSS;
+import com.RodrigoMilanez.projetotecnico.services.exceptions.AuthorizationException;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.DataIntegrityException;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundException;
 
@@ -28,6 +31,11 @@ public class FuncionarioService {
 	
 	
 	public Funcionario findById(Integer id) {
+		UserSS user = UserService.authenticaded();
+		
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Funcionario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Funcionario.class.getName()));
