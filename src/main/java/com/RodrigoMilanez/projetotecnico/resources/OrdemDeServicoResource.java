@@ -94,9 +94,9 @@ public class OrdemDeServicoResource {
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN','TECNICO')")
-	@RequestMapping(value="/{id}/pictures", method=RequestMethod.POST)
-	public ResponseEntity<Void> uploadProfilePicture(@PathVariable Integer id,@RequestParam(name="file") MultipartFile file){
-		URI uri= odsSer.uploadPicture(id,file);
+	@RequestMapping(value="/{id}/equipamentos/{idEq}/pictures", method=RequestMethod.POST)
+	public ResponseEntity<Void> uploadProfilePicture(@PathVariable Integer id,@PathVariable Integer idEq,@RequestParam(name="file") MultipartFile file){
+		URI uri= odsSer.uploadPicture(id,idEq,file);
 		return ResponseEntity.created(uri).build();
 	}
 }

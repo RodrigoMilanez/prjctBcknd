@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,6 +30,10 @@ public class Equipamento implements Serializable{
 	private String marca;
 	private String avaria;
 	private BigDecimal orcamento;
+	private String img;
+	
+	@Value("${img.prefix}")
+	private String prefix;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -102,9 +108,19 @@ public class Equipamento implements Serializable{
 	public void setOrcamento(BigDecimal orçamento) {
 		this.orcamento = orçamento;
 	}
+	
+	public String getUrlImagem() {
+		return (prefix + img); 
+	}
+		
+	public String getImg() {
+		return img;
+	}
 
-	
-	
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 	@Override
 	public String toString() {
 		NumberFormat nfe = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));

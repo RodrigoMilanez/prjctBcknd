@@ -46,8 +46,6 @@ public class OrdemDeServico implements Serializable{
 	private List<Equipamento> equipamentos = new ArrayList<>();
 
 	private BigDecimal orcamento;
-	
-	private String img;
 
 	public OrdemDeServico() {
 	}
@@ -163,12 +161,5 @@ public class OrdemDeServico implements Serializable{
 		return builder.toString();
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
+	
 }
