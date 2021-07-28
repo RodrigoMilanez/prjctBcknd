@@ -1,6 +1,7 @@
 package com.RodrigoMilanez.projetotecnico.services;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.Equipamento;
@@ -20,6 +22,8 @@ import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
 import com.RodrigoMilanez.projetotecnico.repository.EquipamentosRepository;
 import com.RodrigoMilanez.projetotecnico.repository.OrdensDeServicoRepository;
 import com.RodrigoMilanez.projetotecnico.repository.PagamentoRepository;
+import com.RodrigoMilanez.projetotecnico.security.UserSS;
+import com.RodrigoMilanez.projetotecnico.services.exceptions.AuthorizationException;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.DataIntegrityException;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundException;
 
@@ -40,6 +44,12 @@ public class OrdemDeServicoService {
 
 	@Autowired
 	private ClientesService cliSer;
+	
+	//@Autowired
+	//private ImageService imgSer;
+	
+	@Autowired
+	private S3Service S3Ser;
 
 	@Autowired
 	private EquipamentoService eqSer;
@@ -154,5 +164,31 @@ public class OrdemDeServicoService {
 		} catch (ObjectNotFoundException e) {
 			throw new ObjectNotFoundException("Equipamento não existe");
 		}
+	}
+	
+	public URI uploadPicture(Integer id ,MultipartFile multipartFile) {	
+		//return S3Ser.uploadFile(multipartFile);
+		
+		UserSS user = UserService.authenticaded();
+		if (user == null) {
+			throw new AuthorizationException("Você precisa estar logado para fazer upload de imagem!");
+		}
+		OrdemDeServico ods = repo.getById(id);
+		
+		URI uri = S3Ser.uploadFile(multipartFile);
+		
+		
+		ods.setImg(uri.toString());
+		repo.save(ods);
+		return uri;
+		///BufferedImage jpgImage= imgSer.getJpgImageFromFile(multipartFile);
+		
+		//jpgImage = imgSer.cropSquare(jpgImage);
+		//jpgImage = imgSer.resize(jpgImage, size);
+		
+		//String fileName= prefix + user.getId() + ".jpg";
+	
+		//return s3ser.uploadFile(imgSer.getInputStream(jpgImage,"jpg"), fileName , "image");
+			
 	}
 }

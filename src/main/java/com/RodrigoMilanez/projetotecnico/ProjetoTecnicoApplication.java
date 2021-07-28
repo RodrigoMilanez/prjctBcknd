@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProjetoTecnicoApplication implements CommandLineRunner{
 
-	
-	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoTecnicoApplication.class, args);
 
@@ -16,7 +14,6 @@ public class ProjetoTecnicoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-	
 	}
 
 }

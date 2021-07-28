@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
@@ -89,5 +91,12 @@ public class OrdemDeServicoResource {
 			@PathVariable(name = "idEq") Integer idEq) {
 		odsSer.deletarEquipamento(idOrdem, idEq);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN','TECNICO')")
+	@RequestMapping(value="/{id}/pictures", method=RequestMethod.POST)
+	public ResponseEntity<Void> uploadProfilePicture(@PathVariable Integer id,@RequestParam(name="file") MultipartFile file){
+		URI uri= odsSer.uploadPicture(id,file);
+		return ResponseEntity.created(uri).build();
 	}
 }
