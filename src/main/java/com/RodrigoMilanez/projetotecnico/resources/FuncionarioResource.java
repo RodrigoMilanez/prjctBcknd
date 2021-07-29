@@ -59,6 +59,12 @@ public class FuncionarioResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<Funcionario> findByEmail(@RequestParam(value="value") String email) {
+		Funcionario obj = funSer.findByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<FuncionarioDTO>> listarTodos(
 			@RequestParam(value = "page" , defaultValue = "0") Integer page,

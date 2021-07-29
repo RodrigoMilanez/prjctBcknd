@@ -63,6 +63,22 @@ public class FuncionarioService {
 		return null;
 	}
 
+	public Funcionario findByEmail(String email) {
+		
+		UserSS user = UserService.authenticaded();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+	
+		Funcionario obj = repo.findByEmail(email);
+		if (obj == null) {
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Funcionario.class.getName());
+		}
+		return obj;
+		
+	}
+	
 	public List<Funcionario> findAll() {
 		return repo.findAll();
 	}
