@@ -2,8 +2,6 @@ package com.RodrigoMilanez.projetotecnico.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -121,7 +119,7 @@ public class Equipamento implements Serializable{
 		this.img = img;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		NumberFormat nfe = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
 		StringBuilder builder = new StringBuilder();
@@ -133,7 +131,7 @@ public class Equipamento implements Serializable{
 		builder.append(nfe.format(orcamento));
 		builder.append("]");
 		return builder.toString();
-	}
+	}*/
 	
 		
 }

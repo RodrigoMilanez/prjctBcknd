@@ -69,6 +69,12 @@ public class OrdemDeServicoResource {
 		OrdemDeServico obj = odsSer.respostaCliente(id, Status.RECUSADO);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@RequestMapping(value = "/{id}/cancelar", method = RequestMethod.GET)
+	public ResponseEntity<OrdemDeServico> cancelar(@PathVariable Integer id, Status status) {
+		OrdemDeServico obj = odsSer.respostaCliente(id, Status.CANCELADO);
+		return ResponseEntity.ok().body(obj);
+	}
 
 	// == depois ajustar para funcionar com emails
 	@PreAuthorize("hasAnyRole('ADMIN')")

@@ -6,7 +6,8 @@ public enum Status {
 	AGUARDANDO_CLIENTE (2, "AGUARDANDO"),
 	RECUSADO (3, "RECUSADO"),	
 	REPARO (4, "REPARO"),
-	CONCLUÍDO (5, "CONCLUIDO");
+	CONCLUÍDO (5, "CONCLUIDO"),
+	CANCELADO(6, "CANCELADO");
 	
 	private int cod;
 	private String descricao;

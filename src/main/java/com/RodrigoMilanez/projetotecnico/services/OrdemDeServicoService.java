@@ -111,7 +111,7 @@ public class OrdemDeServicoService {
 	public OrdemDeServico respostaCliente(Integer id, Status status) {
 		OrdemDeServico newObj = findById(id);
 		newObj.setStatus(status);
-		if (newObj.getStatus().equals(Status.RECUSADO)) {
+		if (newObj.getStatus().equals(Status.CANCELADO)) {
 			newObj.getPagamento().setEstado(EstadoPagamento.CANCELADO);
 		}
 		return repo.save(newObj);
