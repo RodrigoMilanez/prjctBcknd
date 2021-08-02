@@ -185,6 +185,5 @@ public class OrdemDeServicoService {
 			eqRep.save(eq);
 		}
 		return s3Ser.uploadFile(imgSer.getInputStream(jpgImage,"jpg"), fileName , "image");
-			
 	}
 }

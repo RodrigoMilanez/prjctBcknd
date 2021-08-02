@@ -105,4 +105,5 @@ public class OrdemDeServicoResource {
 		URI uri= odsSer.uploadPicture(id,idEq,file);
 		return ResponseEntity.created(uri).build();
 	}
+	
 }
