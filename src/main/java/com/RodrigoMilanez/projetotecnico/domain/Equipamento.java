@@ -107,10 +107,11 @@ public class Equipamento implements Serializable{
 		this.orcamento = orçamento;
 	}
 	
+	
 	public String getUrlImagem() {
 		return (prefix + img); 
 	}
-		
+	@JsonIgnore	
 	public String getImg() {
 		return img;
 	}
