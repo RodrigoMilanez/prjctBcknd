@@ -65,7 +65,7 @@ public class ClientesService {
 	}
 	
 	public Cliente fromDTO(ClienteNewDto  objDto) {
-		return new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone(), objDto.getEndereço(), objDto.getCpf()); 
+		return new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone(), objDto.getEndereco(), objDto.getCpf()); 
 	}
 	
 	
