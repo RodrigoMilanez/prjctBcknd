@@ -82,13 +82,14 @@ public class DBService {
 		Pagamento pgto1 = new PagamentoComCartão(null, EstadoPagamento.PENDENTE, ods1, 8);
 		ods1.setPagamento(pgto1);
 
-		Funcionario f1 = new Funcionario(null, "Pedro", "88889999", "Drex@gaymer.com", pe.encode("gamer"));
-		Funcionario f2 = new Funcionario(null, "Moreira", "99998888", "Marcelo@weeb.com", pe.encode("mamo42096"));
-		Funcionario f3 = new Funcionario(null, "Paulo", "88889999", "paulao@regulagem.com", pe.encode("bebel"));
-		Funcionario f4 = new Funcionario(null, "Jaime", "78492154", "jaimeralperte@dndmf.com", pe.encode("pamelamadindong"));
-		Funcionario f5 = new Funcionario(null, "Angela", "84751865", "angelaquislene@dndmf.cm", pe.encode("sprinkles"));
-		Funcionario f6 = new Funcionario(null, "Maicon", "87579875", "maiconescort@dndmf.com", pe.encode("thatswhatshesaid"));
-		Funcionario f7 = new Funcionario(null, "Lesni", "88889999", "Lesni@parquesdp.com", pe.encode("anne"));
+		Funcionario f1 = new Funcionario(null, "Pedro Crispim", "88889999", "Drex@gaymer.com", pe.encode("gamer"));
+		Funcionario f2 = new Funcionario(null, "Moreira Pablo", "99998888", "Marcelo@weeb.com", pe.encode("mamo42096"));
+		Funcionario f3 = new Funcionario(null, "Paulo Silva", "88889999", "paulao@regulagem.com", pe.encode("bebel"));
+		Funcionario f4 = new Funcionario(null, "Jaime Palilo", "78492154", "jaimeralperte@dndmf.com", pe.encode("pamelamadindong"));
+		Funcionario f5 = new Funcionario(null, "Angela Melo", "84751865", "angelaquislene@dndmf.cm", pe.encode("sprinkles"));
+		Funcionario f6 = new Funcionario(null, "Maicon Scort", "87579875", "maiconescort@dndmf.com", pe.encode("thatswhatshesaid"));
+		Funcionario f7 = new Funcionario(null, "Lesni Nogueira", "88889999", "Lesni@parquesdp.com", pe.encode("anne"));
+		Funcionario f8 = new Funcionario(null, "0000 0000", "00000000", "0000@0000.com", pe.encode("0000"));
 
 		f1.addPerfil(Perfil.ADMIN);
 		f2.addPerfil(Perfil.ATENDENTE);
@@ -97,9 +98,9 @@ public class DBService {
 		f5.addPerfil(Perfil.ATENDENTE);
 		f6.addPerfil(Perfil.TECNICO);
 		f7.addPerfil(Perfil.TECNICO);
+		f8.addPerfil(Perfil.ADMIN);
 		
-		
-		funRep.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6, f7));
+		funRep.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6, f7, f8));
 		odsRep.saveAll(Arrays.asList(ods1));
 		cliRep.saveAll(Arrays.asList(cli1, cli2));
 		equiRep.saveAll(Arrays.asList(eq1, eq2, eq3));

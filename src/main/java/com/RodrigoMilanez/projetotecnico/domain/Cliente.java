@@ -33,7 +33,7 @@ public class Cliente implements Serializable {
 	@Email
 	private String email;
 	private String telefone;
-	private String endereço;
+	private String endereco;
 	private String cpf;
 	
 
@@ -45,13 +45,13 @@ public class Cliente implements Serializable {
 		
 	}
 
-	public Cliente(Integer id, String nome, String email, String telefone, String endereço, String cpf) {
+	public Cliente(Integer id, String nome, String email, String telefone, String endereco, String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		this.endereço = endereço;
+		this.endereco = endereco;
 		this.cpf= cpf;
 	}
 
@@ -120,12 +120,12 @@ public class Cliente implements Serializable {
 		return true;
 	}
 
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereço) {
+		this.endereco = endereço;
 	}
 
 	public List<OrdemDeServico> getOrdens() {

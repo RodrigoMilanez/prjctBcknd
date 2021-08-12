@@ -23,7 +23,7 @@ public class ClienteNewDto implements Serializable{
 	@NotEmpty(message="Este campo deve ser preenchido")
 	private String telefone;
 	@NotEmpty(message="Este campo deve ser preenchido")
-	private String endereço;
+	private String endereco;
 	@NotEmpty(message="Este campo deve ser preenchido")
 	private String cpf;
 	
@@ -50,11 +50,11 @@ public class ClienteNewDto implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereço) {
+		this.endereco = endereço;
 	}
 
 
