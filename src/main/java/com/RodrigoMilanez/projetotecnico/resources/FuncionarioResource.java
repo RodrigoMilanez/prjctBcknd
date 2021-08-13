@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.dto.FuncionarioDTO;
 import com.RodrigoMilanez.projetotecnico.domain.dto.NewFuncionarioDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.SenhaDTO;
 import com.RodrigoMilanez.projetotecnico.services.FuncionarioService;
 
 @RestController
@@ -46,10 +47,9 @@ public class FuncionarioResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Funcionario obj, @PathVariable Integer id) {
-		obj.setId(id);
-		obj = funSer.update(obj);
+	@RequestMapping(value="/alterarSenha/{id}", method=RequestMethod.POST)
+	public ResponseEntity<Void> update(@RequestBody SenhaDTO senha, @PathVariable Integer id) {
+		funSer.update(id, senha);
 		return ResponseEntity.noContent().build();
 	}
 	@PreAuthorize("hasAnyRole('ADMIN')")

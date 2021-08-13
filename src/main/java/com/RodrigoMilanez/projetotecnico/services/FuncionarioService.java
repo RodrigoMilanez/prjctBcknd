@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Funcionario;
 import com.RodrigoMilanez.projetotecnico.domain.dto.NewFuncionarioDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.SenhaDTO;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Perfil;
 import com.RodrigoMilanez.projetotecnico.repository.FuncionarioRepository;
 import com.RodrigoMilanez.projetotecnico.security.UserSS;
@@ -46,13 +47,7 @@ public class FuncionarioService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
-
-	public Funcionario update(Funcionario obj) {
-		Funcionario newObj = findById(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(obj);
-	}
-
+	
 	public Void delete(Integer id) {
 		findById(id);
 		try {
@@ -95,10 +90,13 @@ public class FuncionarioService {
 		return obj;
 		
 	}
-
-	public void updateData(Funcionario newObj, Funcionario obj) {
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
+	
+	public Funcionario update(Integer id, SenhaDTO senha) {
+		Funcionario obj = repo.getById(id);
+		obj.setSenha(pe.encode(senha.getSenha()));
+		return repo.save(obj);
 	}
 
+
 }
+// git remote set-url --add --push  https://github.com/RodrigoMilanez/PrjtTcFrontEnd.git master
