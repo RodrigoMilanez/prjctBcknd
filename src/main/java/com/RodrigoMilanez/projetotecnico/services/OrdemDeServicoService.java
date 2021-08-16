@@ -5,11 +5,15 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +21,9 @@ import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.Equipamento;
 import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
 import com.RodrigoMilanez.projetotecnico.domain.PagamentoComBoleto;
+import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
 import com.RodrigoMilanez.projetotecnico.domain.dto.OrdemDeServiçoDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.OrdensDTO;
 import com.RodrigoMilanez.projetotecnico.domain.enums.EstadoPagamento;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Status;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
@@ -185,5 +191,11 @@ public class OrdemDeServicoService {
 			eqRep.save(eq);
 		}
 		return s3Ser.uploadFile(imgSer.getInputStream(jpgImage,"jpg"), fileName , "image");
+	}
+	
+	public Page<OrdemDeServico> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),
+				orderBy);
+		return repo.findAll(pageRequest);
 	}
 }

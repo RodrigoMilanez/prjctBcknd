@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
 import com.RodrigoMilanez.projetotecnico.domain.dto.OrdemDeServiçoDTO;
+import com.RodrigoMilanez.projetotecnico.domain.dto.OrdensDTO;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Status;
 import com.RodrigoMilanez.projetotecnico.services.OrdemDeServicoService;
 
@@ -106,4 +108,14 @@ public class OrdemDeServicoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<Page<OrdensDTO>> listarTodos(
+			@RequestParam(value = "page" , defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage" , defaultValue = "24")Integer linesPerPage,
+			@RequestParam(value = "orderBy" , defaultValue = "status")String orderBy, 
+			@RequestParam(value = "direction" , defaultValue = "ASC")String direction) {
+		Page<OrdemDeServico> list = odsSer.findPage(page, linesPerPage, orderBy, direction);
+		Page<OrdensDTO> listDTO = list.map(obj -> new OrdensDTO(obj));
+		return ResponseEntity.ok().body(listDTO);
+	}
 }
