@@ -109,7 +109,9 @@ public class Equipamento implements Serializable{
 	
 	
 	public String getUrlImagem() {
-		return (prefix + img); 
+		//String urlImagem = prefix + img;
+		return (prefix+ img); 
+		
 	}
 	@JsonIgnore	
 	public String getImg() {
