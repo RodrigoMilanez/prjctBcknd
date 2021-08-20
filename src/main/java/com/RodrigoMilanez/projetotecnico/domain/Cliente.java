@@ -38,7 +38,7 @@ public class Cliente implements Serializable {
 	
 
 	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "cliente")
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy = "cliente")
 	private List<OrdemDeServico> ordens = new ArrayList<>();
 	
 	public Cliente () {

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
-import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteNewDto;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
 import com.RodrigoMilanez.projetotecnico.services.exceptions.ObjectNotFoundException;
 
@@ -66,9 +65,6 @@ public class ClientesService {
 		newObj.setTelefone(obj.getTelefone());
 	}
 	
-	public Cliente fromDTO(ClienteNewDto  objDto) {
-		return new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone(), objDto.getEndereco(), objDto.getCpf()); 
-	}
 	
 	
 	public Cliente insert(Cliente obj) {

@@ -9,11 +9,10 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
-import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteNewDto;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
 import com.RodrigoMilanez.projetotecnico.resources.exceptions.FieldMessage;
 
-public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDto> {
+public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, Cliente> {
 	@Override
 	public void initialize(ClienteInsert ann) {
 	}
@@ -22,7 +21,7 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 	private ClientesRepository repo;
 	
 	@Override
-	public boolean isValid(ClienteNewDto objDto, ConstraintValidatorContext context) {
+	public boolean isValid(Cliente objDto, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 		
 		if (!BR.isValidCPF(objDto.getCpf())) {

@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
-import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteNewDto;
 import com.RodrigoMilanez.projetotecnico.services.ClientesService;
 
 @RestController
@@ -66,8 +65,7 @@ public class ClientesResource {
 	@PreAuthorize("hasAnyRole('ADMIN','ATENDENTE')")
 	@Transactional
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDto objDto){
-		Cliente obj = cliSer.fromDTO(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody Cliente obj){
 		obj = cliSer.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();

@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,7 @@ import com.RodrigoMilanez.projetotecnico.domain.Cliente;
 import com.RodrigoMilanez.projetotecnico.domain.Equipamento;
 import com.RodrigoMilanez.projetotecnico.domain.OrdemDeServico;
 import com.RodrigoMilanez.projetotecnico.domain.PagamentoComBoleto;
-import com.RodrigoMilanez.projetotecnico.domain.dto.ClienteDTO;
 import com.RodrigoMilanez.projetotecnico.domain.dto.OrdemDeServiçoDTO;
-import com.RodrigoMilanez.projetotecnico.domain.dto.OrdensDTO;
 import com.RodrigoMilanez.projetotecnico.domain.enums.EstadoPagamento;
 import com.RodrigoMilanez.projetotecnico.domain.enums.Status;
 import com.RodrigoMilanez.projetotecnico.repository.ClientesRepository;
@@ -165,17 +162,38 @@ public class OrdemDeServicoService {
 	public void deletarEquipamento(Integer idOrdem, Integer idEq) {
 		OrdemDeServico ordem = this.findById(idOrdem);
 		Equipamento eq = eqSer.findById(idEq);
+		BigDecimal newOrcamento = ordem.getOrcamento();
+		newOrcamento.subtract(eq.getOrcamento());
 		try {
 			if (eq.getOrdem().equals(ordem)) {
 				eqRep.deleteById(eq.getId());
 			}
-			updateDiagnostico(ordem);
 			ordem.setStatus(Status.REPARO);
+			ordem.setOrcamento(newOrcamento);
 			repo.save(ordem);
 		} catch (ObjectNotFoundException e) {
 			throw new ObjectNotFoundException("Equipamento não existe");
 		}
 	}
+	
+	/*public void deletarEquipamento(Integer idEq) {
+		Equipamento eq = eqSer.findById(idEq);
+				eqRep.deleteById(eq.getId());
+	}*/
+
+
+	
+	
+	public OrdemDeServico orcamento(OrdemDeServico ods) {
+		BigDecimal orcamentoODS = new BigDecimal(0);
+		for (Equipamento eq : ods.getEquipamentos()) {
+			if (eq != null)
+			orcamentoODS = orcamentoODS.add(eq.getOrcamento());
+		}
+		ods.setOrcamento(orcamentoODS);
+		return ods;
+	}
+	
 	
 	public URI uploadPicture(Integer id , Integer idEq,MultipartFile multipartFile) {	
 		UserSS user = UserService.authenticaded();

@@ -35,7 +35,7 @@ public class OrdemDeServico implements Serializable{
 
 	private Status status;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
