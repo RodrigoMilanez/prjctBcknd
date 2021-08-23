@@ -162,14 +162,12 @@ public class OrdemDeServicoService {
 	public void deletarEquipamento(Integer idOrdem, Integer idEq) {
 		OrdemDeServico ordem = this.findById(idOrdem);
 		Equipamento eq = eqSer.findById(idEq);
-		BigDecimal newOrcamento = ordem.getOrcamento();
-		newOrcamento.subtract(eq.getOrcamento());
 		try {
 			if (eq.getOrdem().equals(ordem)) {
 				eqRep.deleteById(eq.getId());
 			}
 			ordem.setStatus(Status.REPARO);
-			ordem.setOrcamento(newOrcamento);
+			orcamento(ordem);
 			repo.save(ordem);
 		} catch (ObjectNotFoundException e) {
 			throw new ObjectNotFoundException("Equipamento não existe");
