@@ -185,9 +185,9 @@ public class OrdemDeServicoService {
 	public OrdemDeServico orcamento(OrdemDeServico ods) {
 		BigDecimal orcamentoODS = new BigDecimal(0);
 		for (Equipamento eq : ods.getEquipamentos()) {
-			if (eq != null)
 			orcamentoODS = orcamentoODS.add(eq.getOrcamento());
 		}
+		
 		ods.setOrcamento(orcamentoODS);
 		return ods;
 	}

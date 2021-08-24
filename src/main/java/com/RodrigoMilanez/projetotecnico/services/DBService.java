@@ -1,5 +1,6 @@
 package com.RodrigoMilanez.projetotecnico.services;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +55,7 @@ public class DBService {
 		List<Cliente> lista = new ArrayList<>();
 		lista.add(cli1);
 		lista.add(cli2);
-
+		BigDecimal valor = new BigDecimal(0);
 		OrdemDeServico ods1 = new OrdemDeServico(null,cli1, null);
 
 		Equipamento eq1 = new Equipamento(null, "Betoneira 400 litros", "Construção", "Maqtron",
@@ -67,6 +68,10 @@ public class DBService {
 		listaEq.add(eq1);
 		listaEq.add(eq2);
 		listaEq.add(eq3);
+		
+		eq1.setOrcamento(valor);
+		eq2.setOrcamento(valor);
+		eq3.setOrcamento(valor);
 
 		ods1.setEquipamentos(listaEq);
 
