@@ -41,8 +41,6 @@ public class OrdensDTO implements Serializable{
 		this.status = status;
 	}
 
-
-
 	public Cliente getCliente() {
 		return cliente;
 	}

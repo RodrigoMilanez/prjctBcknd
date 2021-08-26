@@ -119,6 +119,7 @@ public class OrdemDeServicoService {
 		}
 		return repo.save(newObj);
 	}
+	
 
 	public OrdemDeServico concluir(Integer id, Status status) {
 		OrdemDeServico newObj = findById(id);
@@ -166,7 +167,6 @@ public class OrdemDeServicoService {
 			if (eq.getOrdem().equals(ordem)) {
 				eqRep.deleteById(eq.getId());
 			}
-			ordem.setStatus(Status.REPARO);
 			orcamento(ordem);
 			repo.save(ordem);
 		} catch (ObjectNotFoundException e) {

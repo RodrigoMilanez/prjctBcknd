@@ -28,6 +28,9 @@ public abstract class AbstractEmailService implements EmailService{
 	@Value("${default.sender}")
 	private String sender;
 	
+	@Value("${default.url}")
+	private String url;
+	
 	@Override
 	public void sendOrderconfirmationemail (OrdemDeServico obj) {
 		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
@@ -36,7 +39,11 @@ public abstract class AbstractEmailService implements EmailService{
 
 	protected SimpleMailMessage prepareSimpleMailMessageFromPedido(OrdemDeServico obj) {
 		SimpleMailMessage sm = new SimpleMailMessage();
-		sm.setTo(obj.toString());
+		sm.setTo(obj.getCliente().getEmail());
+		sm.setText("Olá "+ obj.getCliente().getNome()+ 
+				"! segue o link da sua ordem de serviço atualizada no nosso site"
+				+ "para avaliação e confirmação de orçamento: "
+				+ url+obj.getId());
 		sm.setFrom(sender);
 		sm.setSubject("Aguardando confirmação do pedido"); 
 		sm.setSentDate(new Date());
@@ -66,7 +73,10 @@ public abstract class AbstractEmailService implements EmailService{
 		mmh.setFrom(sender);
 		mmh.setSubject("Aguardando confirmação do pedido");
 		mmh.setSentDate(new Date());
-		mmh.setText(htmlFromTemplatePedido(obj),true);
+		mmh.setText("Olá "+ obj.getCliente().getNome()+ 
+				"! segue o link da sua ordem de serviço atualizada no nosso site"
+				+ "para avaliação e confirmação de orçamento: "
+				+ url+obj.getId());
 		return mimeMessage;
 	}
 	
