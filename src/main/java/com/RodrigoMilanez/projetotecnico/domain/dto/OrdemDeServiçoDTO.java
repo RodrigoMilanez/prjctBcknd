@@ -18,6 +18,16 @@ public class OrdemDeServiçoDTO implements Serializable{
 	private List<Equipamento> equipamentos = new ArrayList<>();
 	
 	private Pagamento pagamento;
+	
+	private Integer status;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public Integer getClienteId() {
 		return clienteId;

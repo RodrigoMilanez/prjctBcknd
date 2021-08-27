@@ -13,8 +13,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -27,16 +28,21 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotEmpty
+	@NotEmpty(message="Este campo deve ser preenchido")
+	@Length(min=5, max=80, message="O tamanho deve ter de 5 a 80 caracteres")
 	private String nome;
-	@NotEmpty
+	@NotEmpty(message="Este campo deve ser preenchido")
 	@Email
 	private String email;
+	@NotEmpty(message="Este campo deve ser preenchido")
 	private String telefone;
+	@NotEmpty(message="Este campo deve ser preenchido")
 	private String endereco;
+	@NotEmpty(message="Este campo deve ser preenchido")
+
 	private String cpf;
 	
-
+	
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy = "cliente")
 	private List<OrdemDeServico> ordens = new ArrayList<>();

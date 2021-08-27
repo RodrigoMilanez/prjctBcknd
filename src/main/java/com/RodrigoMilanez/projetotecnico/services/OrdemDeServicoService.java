@@ -111,19 +111,21 @@ public class OrdemDeServicoService {
 		return repo.save(os);
 	}
 
-	public OrdemDeServico respostaCliente(Integer id, Status status) {
+	public OrdemDeServico respostaCliente(OrdemDeServiçoDTO objDto, Integer id) {
 		OrdemDeServico newObj = findById(id);
-		newObj.setStatus(status);
-		if (newObj.getStatus().equals(Status.CANCELADO)) {
+		if (objDto.getStatus() == 2) {
+			newObj.setStatus(Status.CANCELADO);
 			newObj.getPagamento().setEstado(EstadoPagamento.CANCELADO);
+		} else if (objDto.getStatus() == 1) {
+			newObj.setStatus(Status.REPARO);
 		}
 		return repo.save(newObj);
 	}
 	
 
-	public OrdemDeServico concluir(Integer id, Status status) {
+	public OrdemDeServico concluir(OrdemDeServiçoDTO objDto, Integer id) {
 		OrdemDeServico newObj = findById(id);
-		newObj.setStatus(status);
+		newObj.setStatus(Status.CONCLUIDO);
 		if (newObj.getPagamento() instanceof PagamentoComBoleto) {
 			PagamentoComBoleto pagt = (PagamentoComBoleto) newObj.getPagamento();
 			LocalDateTime instante = LocalDateTime.now();
@@ -173,15 +175,7 @@ public class OrdemDeServicoService {
 			throw new ObjectNotFoundException("Equipamento não existe");
 		}
 	}
-	
-	/*public void deletarEquipamento(Integer idEq) {
-		Equipamento eq = eqSer.findById(idEq);
-				eqRep.deleteById(eq.getId());
-	}*/
-
-
-	
-	
+		
 	public OrdemDeServico orcamento(OrdemDeServico ods) {
 		BigDecimal orcamentoODS = new BigDecimal(0);
 		for (Equipamento eq : ods.getEquipamentos()) {
@@ -191,8 +185,7 @@ public class OrdemDeServicoService {
 		ods.setOrcamento(orcamentoODS);
 		return ods;
 	}
-	
-	
+		
 	public URI uploadPicture(Integer id , Integer idEq,MultipartFile multipartFile) {	
 		UserSS user = UserService.authenticaded();
 		if (user == null) {

@@ -2,11 +2,11 @@ package com.RodrigoMilanez.projetotecnico.domain.enums;
 
 public enum Status {
 
-	DIAGNÓSTICO (1, "DIAGNOSTICO"), 
+	DIAGNOSTICO (1, "DIAGNOSTICO"), 
 	AGUARDANDO_CLIENTE (2, "AGUARDANDO"),
 	RECUSADO (3, "RECUSADO"),	
 	REPARO (4, "REPARO"),
-	CONCLUÍDO (5, "CONCLUIDO"),
+	CONCLUIDO (5, "CONCLUIDO"),
 	CANCELADO(6, "CANCELADO");
 	
 	private int cod;

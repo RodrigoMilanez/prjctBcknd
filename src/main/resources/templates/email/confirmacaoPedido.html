@@ -1,46 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title th:remove="all">Order Confirmation</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<div>
-<h1>
-Pedido número: <span th:text="${pedido.id}"> </span>
-</h1>
-<p>
-Instante: <span
-th:text="${#dates.format(pedido.instante, 'dd/MM/yyyy hh:mm')}"></span>
-</p>
-<p>
-Cliente: <span th:text="${pedido.cliente.nome}"></span>
-</p>
-<p>
-Situação do pagamento: <span
-th:text="${pedido.pagamento.estado.descricao}"></span>
-</p>
-<h3>Detalhes do pedido:</h3>
-<table border="1">
-<tr>
-<th>Produto</th>
-<th>Quantidade</th>
-<th>Preço unitário</th>
-<th>Subtotal</th>
-</tr>
-<tr th:each="item : ${pedido.itens}">
-<td th:text="${item.produto.nome}">nome</td>
-<td th:text="${item.quantidade}">quantidade</td>
-<td th:text="${#numbers.formatDecimal(item.preco, 0, 'POINT', 2,
-'COMMA')}">preco</td>
-<td th:text="${#numbers.formatDecimal(item.subTotal, 0, 'POINT', 2,
-'COMMA')}">subTotal</td>
-</tr>
-</table>
-<p>
-Valor total: <span th:text="${#numbers.formatDecimal(pedido.valorTotal, 0,
-'POINT', 2, 'COMMA')}"></span>
-</p>
-</div>
-</body>
+	<head>
+		<title th:remove="all">Order Confirmation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<div>
+			<h1>
+				Olá <span th:text="${pedido.cliente.nome}"> !
+			</h1>
+			<p>
+				Seus equipamentos já foram diagnosticados! Para dar continuadade a ordem de serviço você deve aprovar o item no 
+                nosso site. O botão levará você para a página, para que você revise a Ordem e o orçamento. Assim que a ordem for 
+                atualizada, nossos técnicos vão começar o conserto dos itens. 
+			</p>
+			<button><a th:href='@{http://127.0.0.1:5500/index.html#/clienteView/}+${pedido.id}'>ehs</a></button>
+		</div>
+	</body>
 </html>

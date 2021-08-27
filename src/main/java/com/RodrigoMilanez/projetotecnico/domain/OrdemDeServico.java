@@ -56,7 +56,7 @@ public class OrdemDeServico implements Serializable{
 		this.cliente = cliente;
 		this.orcamento = new BigDecimal("0.0");
 		this.pagamento = pagamento;
-		this.status = Status.DIAGNÓSTICO;
+		this.status = Status.DIAGNOSTICO;
 	}
 
 	public BigDecimal getOrcamento() {

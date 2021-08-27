@@ -40,10 +40,11 @@ public abstract class AbstractEmailService implements EmailService{
 	protected SimpleMailMessage prepareSimpleMailMessageFromPedido(OrdemDeServico obj) {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(obj.getCliente().getEmail());
-		sm.setText("Olá "+ obj.getCliente().getNome()+ 
-				"! segue o link da sua ordem de serviço atualizada no nosso site"
-				+ "para avaliação e confirmação de orçamento: "
-				+ url+obj.getId());
+		/*mmh.setText("Olá "+ obj.getCliente().getNome()+ 
+		"! segue o link da sua ordem de serviço atualizada no nosso site"
+		+ " para avaliação e confirmação de orçamento: "
+		+ url+obj.getId());*/
+		sm.setText(htmlFromTemplatePedido(obj));;
 		sm.setFrom(sender);
 		sm.setSubject("Aguardando confirmação do pedido"); 
 		sm.setSentDate(new Date());
@@ -73,10 +74,12 @@ public abstract class AbstractEmailService implements EmailService{
 		mmh.setFrom(sender);
 		mmh.setSubject("Aguardando confirmação do pedido");
 		mmh.setSentDate(new Date());
-		mmh.setText("Olá "+ obj.getCliente().getNome()+ 
+		/*mmh.setText("Olá "+ obj.getCliente().getNome()+ 
 				"! segue o link da sua ordem de serviço atualizada no nosso site"
-				+ "para avaliação e confirmação de orçamento: "
-				+ url+obj.getId());
+				+ " para avaliação e confirmação de orçamento: "
+				+ url+obj.getId());*/
+		mmh.setText(htmlFromTemplatePedido(obj), true);
+		
 		return mimeMessage;
 	}
 	
