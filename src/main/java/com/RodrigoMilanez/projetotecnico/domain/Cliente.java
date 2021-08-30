@@ -89,7 +89,6 @@ public class Cliente implements Serializable {
 		this.telefone = telefone;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
@@ -97,6 +96,30 @@ public class Cliente implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<OrdemDeServico> getOrdens() {
+		return ordens;
+	}
+
+	public void setOrdens(List<OrdemDeServico> ordens) {
+		this.ordens = ordens;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	
 	@Override
@@ -123,30 +146,6 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public List<OrdemDeServico> getOrdens() {
-		return ordens;
-	}
-
-	public void setOrdens(List<OrdemDeServico> ordens) {
-		this.ordens = ordens;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 }
