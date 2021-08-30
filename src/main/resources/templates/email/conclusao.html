@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<title th:remove="all">Order Confirmation</title>
+		<title th:remove="all">Order Conclusion</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<style>
             body {
@@ -23,14 +23,14 @@
 	<body>
 		<div>
 			<h1>
-				Olá <span th:text="${pedido.cliente.nome}"/>! 
+				Olá novamente, <span th:text="${pedido.cliente.nome}"> !
 			</h1>
 			<p>
-				Seus equipamentos já foram diagnosticados! Para dar continuadade a ordem de serviço você deve aprovar o item no 
-                nosso site. O botão levará você para a página, para que você revise a Ordem e o orçamento. Assim que a ordem for 
-                atualizada, nossos técnicos irão começar o conserto dos itens. Abaixo segue uma lista dos equipamentos compreendidos na ordem. 
+				Sua Ordem foi concluída por nossos técnicos. Seus equipamentos já estão prontos para você vir
+				buscar na loja!
 			</p>
 			<table>
+	            <table>
 			<tr>
 				<th>Id do equipamento</th>
 				<th>Nome do equipamento</th>
@@ -50,8 +50,8 @@
 				<td colspan="4"	th:text="${pedido.orcamento}"/>
 			</tr>
 			<table>
-			<br>
-			<button><a th:href='@{http://127.0.0.1:5500/index.html#/clienteView/}+${pedido.id}'>Acessar a ordem</a></button>
+        	</table>
+			
 		</div>
 	</body>
 </html>

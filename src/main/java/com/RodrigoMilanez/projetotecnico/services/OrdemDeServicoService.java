@@ -131,9 +131,9 @@ public class OrdemDeServicoService {
 			LocalDateTime instante = LocalDateTime.now();
 			pagt.setDataPagamento(instante);
 		}
-
+		
 		newObj.getPagamento().setEstado(EstadoPagamento.QUITADO);
-
+		emailSer.sendOrderConclusionEmail(newObj);
 		return repo.save(newObj);
 	}
 

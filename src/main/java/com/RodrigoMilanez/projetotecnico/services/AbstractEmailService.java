@@ -36,25 +36,43 @@ public abstract class AbstractEmailService implements EmailService{
 		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
 		sendEmail(sm);
 	}
+	
+	@Override
+	public void sendOrderConclusionEmail (OrdemDeServico obj) {
+		SimpleMailMessage sm = prepareSimpleMailMessageFromConclusao(obj);
+		sendEmail(sm);
+	}
 
 	protected SimpleMailMessage prepareSimpleMailMessageFromPedido(OrdemDeServico obj) {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(obj.getCliente().getEmail());
-		/*mmh.setText("Olá "+ obj.getCliente().getNome()+ 
-		"! segue o link da sua ordem de serviço atualizada no nosso site"
-		+ " para avaliação e confirmação de orçamento: "
-		+ url+obj.getId());*/
 		sm.setText(htmlFromTemplatePedido(obj));;
 		sm.setFrom(sender);
-		sm.setSubject("Aguardando confirmação do pedido"); 
+		sm.setSubject("Aguardando confirmação de ordem"); 
 		sm.setSentDate(new Date());
 		return sm;
 	}
 	
+	protected SimpleMailMessage prepareSimpleMailMessageFromConclusao(OrdemDeServico obj) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(obj.getCliente().getEmail());
+		sm.setText(htmlFromTemplateConclusao(obj));;
+		sm.setFrom(sender);
+		sm.setSubject("Ordem concluída"); 
+		sm.setSentDate(new Date());
+		return sm;
+	}
+	//método que gera o email a partir do pedido
 	protected String htmlFromTemplatePedido(OrdemDeServico obj) {
 		Context context = new Context();
 		context.setVariable("pedido", obj);
 		return templateEng.process("email/confirmacaoPedido", context);
+ 	}
+	//método que gera o email a partir da conclusão
+	protected String htmlFromTemplateConclusao(OrdemDeServico obj) {
+		Context context = new Context();
+		context.setVariable("pedido", obj);
+		return templateEng.process("email/conclusao", context);
  	}
 	
 	@Override
@@ -66,6 +84,27 @@ public abstract class AbstractEmailService implements EmailService{
 			sendOrderconfirmationemail(obj);
 		}
 	}
+	
+	@Override
+	public void	sendOrderConclusionHtmlEmail(OrdemDeServico obj) {
+		try {
+			MimeMessage mm = prepareMimeMailMessageFromConclusao(obj);
+			sendHtmlEmail(mm);
+		}catch (MessagingException e) {
+			sendOrderconfirmationemail(obj);
+		}
+	}
+	
+	protected MimeMessage prepareMimeMailMessageFromConclusao(OrdemDeServico obj) throws MessagingException {
+		MimeMessage mimeMessage = JMS.createMimeMessage();
+		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);
+		mmh.setTo(obj.getCliente().getEmail());
+		mmh.setFrom(sender);
+		mmh.setSubject("Aguardando confirmação do pedido");
+		mmh.setSentDate(new Date());
+		mmh.setText(htmlFromTemplateConclusao(obj), true);
+		return mimeMessage;
+	}
 
 	protected MimeMessage prepareMimeMailMessageFromPedido(OrdemDeServico obj) throws MessagingException {
 		MimeMessage mimeMessage = JMS.createMimeMessage();
@@ -74,10 +113,6 @@ public abstract class AbstractEmailService implements EmailService{
 		mmh.setFrom(sender);
 		mmh.setSubject("Aguardando confirmação do pedido");
 		mmh.setSentDate(new Date());
-		/*mmh.setText("Olá "+ obj.getCliente().getNome()+ 
-				"! segue o link da sua ordem de serviço atualizada no nosso site"
-				+ " para avaliação e confirmação de orçamento: "
-				+ url+obj.getId());*/
 		mmh.setText(htmlFromTemplatePedido(obj), true);
 		
 		return mimeMessage;
