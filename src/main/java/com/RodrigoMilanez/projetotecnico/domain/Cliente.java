@@ -39,7 +39,6 @@ public class Cliente implements Serializable {
 	@NotEmpty(message="Este campo deve ser preenchido")
 	private String endereco;
 	@NotEmpty(message="Este campo deve ser preenchido")
-
 	private String cpf;
 	
 	
@@ -130,8 +129,8 @@ public class Cliente implements Serializable {
 		return endereco;
 	}
 
-	public void setEndereco(String endereço) {
-		this.endereco = endereço;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public List<OrdemDeServico> getOrdens() {
