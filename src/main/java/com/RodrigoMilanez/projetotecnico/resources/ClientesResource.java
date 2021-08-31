@@ -51,6 +51,7 @@ public class ClientesResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN','ATENDENTE','TECNICO')")	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDTO>> listarTodos(
 			@RequestParam(value = "page" , defaultValue = "0") Integer page,
