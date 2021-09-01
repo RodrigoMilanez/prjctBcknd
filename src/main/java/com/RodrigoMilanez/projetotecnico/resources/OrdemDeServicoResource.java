@@ -99,34 +99,16 @@ public class OrdemDeServicoResource {
 	
 	/**/
 	
-	@PutMapping(value="{id}/respostaCliente")
+	@PutMapping(value="respostaCliente/{id}")
 	public ResponseEntity<OrdemDeServico> respostaCliente(@RequestBody OrdemDeServiçoDTO objDTO, @PathVariable Integer id) {
 		OrdemDeServico obj = odsSer.respostaCliente(objDTO, id);
 		return ResponseEntity.ok().body(obj);
 	}
-
+	@PreAuthorize("hasAnyRole('ADMIN','TECNICO')")
 	@PutMapping(value = "/{id}/concluir")
 	public ResponseEntity<OrdemDeServico> concluir(@RequestBody OrdemDeServiçoDTO objDTO,@PathVariable Integer id) {
 		OrdemDeServico obj = odsSer.concluir(objDTO, id);
 		return ResponseEntity.ok().body(obj);
 	}
-	/*
-	// == cliente decide se prossegue com a ordem ou se cancela
-		@RequestMapping(value = "/{id}/aprovado", method = RequestMethod.GET)
-		public ResponseEntity<OrdemDeServico> aprovar(@PathVariable Integer id, Status status) {
-			OrdemDeServico obj = odsSer.respostaCliente(id, Status.REPARO);
-			return ResponseEntity.ok().body(obj);
-		}
-
-		@RequestMapping(value = "/{id}/cancelar", method = RequestMethod.GET)
-		public ResponseEntity<OrdemDeServico> cancelar(@PathVariable Integer id, Status status) {
-			OrdemDeServico obj = odsSer.respostaCliente(id, Status.CANCELADO);
-			return ResponseEntity.ok().body(obj);
-		}
-		// == conclui a ordem de serviço
-			@RequestMapping(value = "/{id}/concluir", method = RequestMethod.GET)
-			public ResponseEntity<OrdemDeServico> concluir(@PathVariable Integer id, Status status) {
-				OrdemDeServico obj = odsSer.concluir(id, Status.CONCLUÍDO);
-				return ResponseEntity.ok().body(obj);
-			}*/
+	
 }
